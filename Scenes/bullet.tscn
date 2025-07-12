@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1jc2dbw5yxlu"]
+
+[ext_resource type="Script" uid="uid://dqkuhy773xugv" path="res://Scripts/bullet.gd" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://d144emuihepn7" path="res://Assets/Sprites/Color-red.jpg" id="1_xjght"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oduel"]
+size = Vector2(15, 13)
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 4
+gravity_scale = 0.0
+script = ExtResource("1_oduel")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6.75)
+scale = Vector2(0.0521194, 0.0333333)
+texture = ExtResource("1_xjght")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_oduel")
+
+[node name="lifeTime" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="lifeTime" to="." method="_on_life_time_timeout"]
