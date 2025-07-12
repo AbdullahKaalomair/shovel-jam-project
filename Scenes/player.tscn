@@ -54,7 +54,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_pu2lt")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -94,7 +94,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_gymyn")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"run",
 "speed": 20.0
 }]
 
@@ -108,7 +108,7 @@ script = ExtResource("1_cvnsp")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_pu2lt")
 animation = &"jump"
-autoplay = "default"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)
