@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 const projectile_speed = 400
+#const ENEMY = preload("res://Scenes/enemy.tscn")
 
 func _ready() -> void:
 	linear_velocity = Vector2(projectile_speed, 0).rotated(rotation)
@@ -17,5 +18,5 @@ func _on_body_entered(body: Node) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	self.hide()
-	if body is RigidBody2D:
+	if body is Enemy:
 		body.take_damage()

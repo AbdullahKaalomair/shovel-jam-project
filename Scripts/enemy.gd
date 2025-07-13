@@ -1,6 +1,8 @@
-extends RigidBody2D
+extends CharacterBody2D
+class_name Enemy
 
 var health = 3
+var damage = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -16,3 +18,8 @@ func take_damage():
 	print(health)
 	if health <= 0:
 		queue_free()
+
+
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if body is Tower:
+		#body.enemy_attacking("enemy", 1)
