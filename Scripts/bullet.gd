@@ -12,4 +12,10 @@ func _on_life_time_timeout() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
+	pass
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
 	self.hide()
+	if body is RigidBody2D:
+		body.take_damage()
