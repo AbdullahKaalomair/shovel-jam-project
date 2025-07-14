@@ -46,11 +46,11 @@ func _physics_process(delta: float) -> void:
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent_2d.get_next_path_position()
 
-	velocity = current_agent_position.direction_to(next_path_position) * SPEED 
+	velocity.x = current_agent_position.direction_to(next_path_position).x * SPEED 
 	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += get_gravity().y * delta
 		
 	move_and_slide()
 

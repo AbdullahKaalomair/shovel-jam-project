@@ -457,7 +457,7 @@ position = Vector2(83, 643)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_qxrlw")]
-position = Vector2(560, 624)
+position = Vector2(616, 536)
 target = NodePath("../GumballMachine")
 
 [node name="GumballMachine" parent="." instance=ExtResource("3_wrm1d")]
