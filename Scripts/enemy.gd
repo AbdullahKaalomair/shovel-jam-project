@@ -3,11 +3,13 @@ class_name Enemy
 
 @export var target: Node2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var wall_detection: RayCast2D = $WallDetection
 
 var health = 3
 var damage = 1
 
 const SPEED = 130.0
+const JUMP_VELOCITY = -300.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,7 +35,8 @@ func set_movement_target(movement_target: Vector2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if wall_detection.is_colliding():
+		velocity.y = JUMP_VELOCITY
 
 func _physics_process(delta: float) -> void:
 	
