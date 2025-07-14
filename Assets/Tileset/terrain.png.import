@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxp1570qw84li"
-path="res://.godot/imported/PlaceHolder.png-a13598cd41869946e641055454a082ee.ctex"
+uid="uid://cejltgm8ujq20"
+path="res://.godot/imported/terrain.png-2cda17ab13d1c51d54872717e5b0de10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tileset/PlaceHolder.png"
-dest_files=["res://.godot/imported/PlaceHolder.png-a13598cd41869946e641055454a082ee.ctex"]
+source_file="res://Assets/Tileset/terrain.png"
+dest_files=["res://.godot/imported/terrain.png-2cda17ab13d1c51d54872717e5b0de10.ctex"]
 
 [params]
 
