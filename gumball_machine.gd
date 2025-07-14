@@ -5,6 +5,9 @@ var damage_sources := {}
 var damage_timer := 0.0
 const DAMAGE_INTERVAL := 1.0  # damage every 1 second
 
+var playerIn = false
+@export var score: Node
+@export var player: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,7 +24,10 @@ func _process(delta):
 			damage_timer = 0.0
 	else:
 		damage_timer = 0.0  # reset when not overlapping
-
+		
+	if Input.is_action_just_pressed("interact") and score.money > 3 and playerIn:
+		player.ammo += 10
+		score.money -= 3
 
 func take_damage(damage: int):
 	print(damage)
@@ -30,20 +36,22 @@ func take_damage(damage: int):
 	if health <= 0:
 		queue_free()
 	
-#func enemy_attacking(enemy: String, damage: int):
-	#print("first function")
-	#damage_sources[enemy] = damage
-#
-#func enemy_stop_attacking(enemy: String):
-	#damage_sources.erase(enemy)
+	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
-		print(body)
 		damage_sources[body] = body.damage
+	
+	if body is Player:
+		playerIn = true
+
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		damage_sources.erase(body)
+	
+	if body is Player:
+		playerIn = false
+	

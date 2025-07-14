@@ -8,9 +8,10 @@ class_name Enemy
 var health = 3
 var damage = 1
 
-const SPEED = 130.0
+const SPEED = 110.0
 const JUMP_VELOCITY = -300.0
 
+signal givePoint(point)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,9 +60,11 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage():
+	emit_signal("givePoint", 1)
 	health -= 1
 	print(health)
 	if health <= 0:
+		emit_signal("givePoint", 10)
 		queue_free()
 
 

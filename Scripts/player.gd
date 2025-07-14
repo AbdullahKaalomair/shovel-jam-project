@@ -1,8 +1,11 @@
 extends CharacterBody2D
-
+class_name Player
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -400.0
+
+var ammo = 5
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 const BULLET = preload("res://Scenes/bullet.tscn")
 
@@ -46,8 +49,10 @@ func _physics_process(delta: float) -> void:
 
 func SkillLoop():
 	if Input.is_action_just_pressed("shoot"):
-		get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
-		var bullet_instance = BULLET.instantiate()
-		bullet_instance.position = get_node("TurnAxis/ShootPoint").get_global_position()
-		bullet_instance.rotation = get_angle_to(get_global_mouse_position())
-		get_parent().add_child(bullet_instance)
+		if ammo > 0:
+			ammo -= 1
+			get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+			var bullet_instance = BULLET.instantiate()
+			bullet_instance.position = get_node("TurnAxis/ShootPoint").get_global_position()
+			bullet_instance.rotation = get_angle_to(get_global_mouse_position())
+			get_parent().add_child(bullet_instance)
