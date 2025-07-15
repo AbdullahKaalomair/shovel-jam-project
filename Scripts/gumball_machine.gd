@@ -17,6 +17,7 @@ var playerIn = false
 func _ready() -> void:
 	hp_bar.max_value = max_health
 	hp_bar.value = health
+	hp_bar.get("theme_override_styles/fill").texture.pause = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

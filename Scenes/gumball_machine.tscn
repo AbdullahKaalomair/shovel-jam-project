@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bar1w00s77654"]
+[gd_scene load_steps=14 format=3 uid="uid://bar1w00s77654"]
 
 [ext_resource type="Script" uid="uid://ddlrx7vydnjiq" path="res://Scripts/gumball_machine.gd" id="1_sb3bh"]
 [ext_resource type="Texture2D" uid="uid://bi8imy6ka53mj" path="res://Assets/Sprites/gumball machine.png" id="2_sb3bh"]
+[ext_resource type="Texture2D" uid="uid://0tpuloscvcyv" path="res://Assets/Sprites/HealthBar/HealthBar0.png" id="4_bdd0h"]
+[ext_resource type="Texture2D" uid="uid://wtmwqmxob3ab" path="res://Assets/Sprites/HealthBar/HealthBar1.png" id="5_kms5s"]
+[ext_resource type="Texture2D" uid="uid://bxwe8nuf4jlrv" path="res://Assets/Sprites/HealthBar/HealthBar2.png" id="6_an35b"]
+[ext_resource type="Texture2D" uid="uid://bfbm83h8h2jv0" path="res://Assets/Sprites/HealthBar/HealthBar3.png" id="7_hul8r"]
+[ext_resource type="Texture2D" uid="uid://c8358as61o8ho" path="res://Assets/Sprites/HealthBar/HealthBar4.png" id="8_0emxa"]
+[ext_resource type="Texture2D" uid="uid://debmoe5ym57p1" path="res://Assets/Sprites/HealthBar/HealthBar5.png" id="9_vw1jk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym8v"]
 size = Vector2(48, 93)
@@ -9,13 +15,37 @@ size = Vector2(48, 93)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb3bh"]
 size = Vector2(68, 102.75)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb3bh"]
-bg_color = Color(0, 1, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 20
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipfdy"]
+bg_color = Color(0.737193, 0.737193, 0.737193, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_xfvyo"]
+frames = 6
+pause = true
+frame_0/texture = ExtResource("4_bdd0h")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("5_kms5s")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("6_an35b")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("7_hul8r")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("8_0emxa")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("9_vw1jk")
+frame_5/duration = 0.1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ym8v"]
+texture = SubResource("AnimatedTexture_xfvyo")
+axis_stretch_horizontal = 2
 
 [node name="GumballMachine" type="StaticBody2D"]
 collision_layer = 32
@@ -43,24 +73,26 @@ shape = SubResource("RectangleShape2D_sb3bh")
 [node name="UIControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -24.0
-offset_top = -108.0
-offset_right = 24.0
+offset_left = -34.0
+offset_top = -113.0
+offset_right = 34.0
 
 [node name="HealthBar" type="ProgressBar" parent="UIControl"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -52.5
-offset_right = 52.5
-offset_bottom = 10.0
+offset_left = -24.0
+offset_top = 2.0
+offset_right = 24.0
+offset_bottom = 17.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_sb3bh")
-fill_mode = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ipfdy")
+theme_override_styles/fill = SubResource("StyleBoxTexture_7ym8v")
+value = 100.0
 show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
