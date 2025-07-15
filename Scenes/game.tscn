@@ -491,7 +491,7 @@ position = Vector2(-8, -8)
 navigation_polygon = SubResource("NavigationPolygon_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(704, 528)
+position = Vector2(406, 308)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
@@ -504,7 +504,7 @@ position = Vector2(83, 643)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_qxrlw")]
-position = Vector2(288, 620)
+position = Vector2(337, 311)
 target = NodePath("../GumballMachine")
 
 [node name="GumballMachine" parent="." node_paths=PackedStringArray("score", "player") instance=ExtResource("3_wrm1d")]

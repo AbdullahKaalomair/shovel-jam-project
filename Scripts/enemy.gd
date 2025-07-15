@@ -68,6 +68,6 @@ func take_damage():
 		queue_free()
 
 
-#func _on_area_2d_body_entered(body: Node2D) -> void:
-	#if body is Tower:
-		#body.enemy_attacking("enemy", 1)
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.get_hit(global_position)

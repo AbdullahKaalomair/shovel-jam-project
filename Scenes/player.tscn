@@ -127,3 +127,7 @@ position = Vector2(0, -6)
 
 [node name="ShootPoint" type="Marker2D" parent="TurnAxis"]
 position = Vector2(13, 0)
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
