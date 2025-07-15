@@ -11,6 +11,7 @@ const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 var is_invulnerable := false
 var ammo = 5
 
+@onready var tower_interact_container: PanelContainer = $TowerInteractContainer
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 const BULLET = preload("res://Scenes/bullet.tscn")
@@ -90,3 +91,9 @@ func get_hit(from_position: Vector2) -> void:
 func _on_invulnerability_timer_timeout() -> void:
 	is_invulnerable = false
 	modulate = Color(1, 1, 1)  # Reset color
+
+func enter_tower():
+	tower_interact_container.visible = true
+
+func exit_tower():
+	tower_interact_container.visible = false

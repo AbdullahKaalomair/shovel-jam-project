@@ -108,6 +108,7 @@ animations = [{
 size = Vector2(12, 15)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_cvnsp")
@@ -129,5 +130,24 @@ position = Vector2(0, -6)
 position = Vector2(13, 0)
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
+
+[node name="TowerInteractContainer" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_top = -31.0
+offset_right = 68.0
+offset_bottom = -19.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TowerInteractContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "Press E to use 3 points for ammo"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
