@@ -10,7 +10,8 @@ var playerIn = false
 @export var score: Node
 @export var player: Node2D
 
-@onready var hp_bar: ProgressBar = $HealthBar
+@onready var hp_bar: ProgressBar = $UIControl/HealthBar
+@onready var sprite: Sprite2D = $Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +30,7 @@ func _process(delta):
 	else:
 		damage_timer = 0.0  # reset when not overlapping
 		
-	if Input.is_action_just_pressed("interact") and score.money > 3 and playerIn:
+	if playerIn and Input.is_action_just_pressed("interact") and score.money > 3:
 		player.ammo += 10
 		score.money -= 3
 
@@ -38,6 +39,8 @@ func take_damage(damage: int):
 	print(health)
 	health -= damage
 	hp_bar.value = health
+	if health % 2 == 0:
+		sprite.frame -= 1
 	if health <= 0:
 		queue_free()
 	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dii6142lti6wm"
-path="res://.godot/imported/sgm_red.webp-a85bbbd65ebba87c40216036a45e965a.ctex"
+uid="uid://bi8imy6ka53mj"
+path="res://.godot/imported/gumball machine.png-f0f648804707fcb85e52b2c59429565e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/sgm_red.webp"
-dest_files=["res://.godot/imported/sgm_red.webp-a85bbbd65ebba87c40216036a45e965a.ctex"]
+source_file="res://Assets/Sprites/gumball machine.png"
+dest_files=["res://.godot/imported/gumball machine.png-f0f648804707fcb85e52b2c59429565e.ctex"]
 
 [params]
 

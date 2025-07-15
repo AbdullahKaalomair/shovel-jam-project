@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://bar1w00s77654"]
 
 [ext_resource type="Script" uid="uid://ddlrx7vydnjiq" path="res://Scripts/gumball_machine.gd" id="1_sb3bh"]
-[ext_resource type="Texture2D" uid="uid://dii6142lti6wm" path="res://Assets/Sprites/sgm_red.webp" id="2_3msrs"]
+[ext_resource type="Texture2D" uid="uid://bi8imy6ka53mj" path="res://Assets/Sprites/gumball machine.png" id="2_sb3bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym8v"]
-size = Vector2(19, 56)
+size = Vector2(48, 93)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb3bh"]
-size = Vector2(36.5, 63.5)
+size = Vector2(68, 102.75)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb3bh"]
 bg_color = Color(0, 1, 0, 1)
@@ -22,36 +22,46 @@ collision_layer = 32
 collision_mask = 20
 script = ExtResource("1_sb3bh")
 
-[node name="SgmRed" type="Sprite2D" parent="."]
-position = Vector2(0, -28)
-scale = Vector2(0.075, 0.0726923)
-texture = ExtResource("2_3msrs")
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+scale = Vector2(3, 3)
+texture = ExtResource("2_sb3bh")
+hframes = 6
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -27)
+position = Vector2(0, -46.5)
 shape = SubResource("RectangleShape2D_7ym8v")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -32)
+position = Vector2(0, -51.625)
 shape = SubResource("RectangleShape2D_sb3bh")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="UIControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -108.0
+offset_right = 24.0
+
+[node name="HealthBar" type="ProgressBar" parent="UIControl"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -53.0
-offset_top = -74.0
-offset_right = 52.0
-offset_bottom = -64.0
+offset_left = -52.5
+offset_right = 52.5
+offset_bottom = 10.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_sb3bh")
 fill_mode = 1
+show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
