@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bar1w00s77654"]
+[gd_scene load_steps=6 format=3 uid="uid://bar1w00s77654"]
 
 [ext_resource type="Script" uid="uid://ddlrx7vydnjiq" path="res://gumball_machine.gd" id="1_sb3bh"]
 [ext_resource type="Texture2D" uid="uid://dii6142lti6wm" path="res://Assets/Sprites/sgm_red.webp" id="2_3msrs"]
@@ -8,6 +8,14 @@ size = Vector2(19, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb3bh"]
 size = Vector2(36.5, 63.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb3bh"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 20
 
 [node name="GumballMachine" type="StaticBody2D"]
 collision_layer = 32
@@ -29,6 +37,21 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_sb3bh")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = -96.0
+offset_right = 52.0
+offset_bottom = -69.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_sb3bh")
+fill_mode = 1
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

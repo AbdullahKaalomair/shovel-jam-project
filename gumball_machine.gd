@@ -1,6 +1,7 @@
 extends StaticBody2D
 class_name Tower
-var health = 5
+var max_health = 10
+var health = max_health
 var damage_sources := {}
 var damage_timer := 0.0
 const DAMAGE_INTERVAL := 1.0  # damage every 1 second
@@ -9,9 +10,12 @@ var playerIn = false
 @export var score: Node
 @export var player: Node2D
 
+@onready var hp_bar: ProgressBar = $HealthBar
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	hp_bar.max_value = max_health
+	hp_bar.value = health
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,6 +37,7 @@ func take_damage(damage: int):
 	print(damage)
 	print(health)
 	health -= damage
+	hp_bar.value = health
 	if health <= 0:
 		queue_free()
 	

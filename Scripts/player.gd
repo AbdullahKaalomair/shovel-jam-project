@@ -5,7 +5,7 @@ const SPEED = 130.0
 const JUMP_VELOCITY = -400.0
 @export var knockback_force := 400.0
 var knockback_velocity := Vector2.ZERO
-const KNOCKBACK_DECAY := 1200.0  # tweak to make knockback fade out
+const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 @export var hitstun_duration := 1.0  # seconds
 
 var is_invulnerable := false
