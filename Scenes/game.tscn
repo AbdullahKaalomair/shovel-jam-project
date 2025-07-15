@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://cetlhwcaeripf" path="res://Scenes/player.tscn" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://cnukdnaj3l13v" path="res://Scenes/enemy.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://m6r45hdqfvbf" path="res://Scenes/Enemies/PeppermintCandyEnemy.tscn" id="5_1l0tm"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
 
@@ -15,34 +15,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(663, 408, 742, 407, 743
 
 [sub_resource type="Animation" id="Animation_3dryh"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Enemy:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(563, 646)]
-}
 
 [sub_resource type="Animation" id="Animation_wrm1d"]
 resource_name = "enemy move"
 length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Enemy:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.01, 3.93333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(563, 646), Vector2(666, 646), Vector2(707, 635), Vector2(529, 646)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wowpa"]
 _data = {
@@ -504,10 +480,6 @@ visible = false
 position = Vector2(83, 643)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_qxrlw")]
-position = Vector2(816, 443)
-target = NodePath("../GumballMachine")
-
 [node name="GumballMachine" parent="." node_paths=PackedStringArray("score", "player") instance=ExtResource("3_wrm1d")]
 position = Vector2(708, 192)
 score = NodePath("../GameManager")
@@ -562,4 +534,5 @@ text = "Points: "
 layout_mode = 2
 text = "0"
 
-[connection signal="givePoint" from="Enemy" to="GameManager" method="_on_enemy_give_point"]
+[node name="Enemy" parent="." instance=ExtResource("5_1l0tm")]
+position = Vector2(809, 441)

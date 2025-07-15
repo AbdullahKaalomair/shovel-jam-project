@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3 uid="uid://m6r45hdqfvbf"]
+
+[ext_resource type="PackedScene" uid="uid://cnukdnaj3l13v" path="res://Scenes/enemy.tscn" id="1_op8mc"]
+[ext_resource type="Texture2D" uid="uid://bar50wkbwm6wj" path="res://Assets/Sprites/enemies/Peppermint Monster.png" id="2_no16n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op8mc"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i1y3"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml4ax"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfmmb"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3m3n"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn76a"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nih55"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3ayg"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhym2"]
+atlas = ExtResource("2_no16n")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0cs5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_op8mc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i1y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml4ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfmmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3m3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn76a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nih55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3ayg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhym2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mfgve"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2gcc"]
+
+[node name="PeppermintCandyEnemy" instance=ExtResource("1_op8mc")]
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -6)
+scale = Vector2(1, 0.855)
+sprite_frames = SubResource("SpriteFrames_n0cs5")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_mfgve")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_s2gcc")
+
+[node name="WallDetectionRight" parent="." index="4"]
+position = Vector2(8, -6)
+
+[node name="WallDetectionLeft" parent="." index="5"]
+position = Vector2(-8, -6)

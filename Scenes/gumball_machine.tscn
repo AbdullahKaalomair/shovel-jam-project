@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bar1w00s77654"]
 
-[ext_resource type="Script" uid="uid://ddlrx7vydnjiq" path="res://gumball_machine.gd" id="1_sb3bh"]
+[ext_resource type="Script" uid="uid://ddlrx7vydnjiq" path="res://Scripts/gumball_machine.gd" id="1_sb3bh"]
 [ext_resource type="Texture2D" uid="uid://dii6142lti6wm" path="res://Assets/Sprites/sgm_red.webp" id="2_3msrs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym8v"]

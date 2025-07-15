@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var target: Node2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var target: Tower = $"../GumballMachine"
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft
@@ -9,11 +10,11 @@ class_name Enemy
 
 var health = 3
 var damage = 1
-var jumpThreshold = 10 #This decides how slow the enemy has to be to decide to jump
+var jumpThreshold = 1 #This decides how slow the enemy has to be to decide to jump
 var tripleJump = 2
 var inTower = false
 
-const SPEED = 150.0
+const SPEED = 110.0
 const JUMP_VELOCITY = -300.0
 
 signal givePoint(point)
@@ -55,6 +56,8 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = current_agent_position.direction_to(next_path_position).x * SPEED 
 	
+	animation_handle()
+	
 	#Enemy Jump Logic
 	if wall_detection_right.is_colliding() or wall_detection_left.is_colliding():
 		velocity.y = JUMP_VELOCITY
@@ -81,8 +84,17 @@ func take_damage():
 		emit_signal("givePoint", 10)
 		queue_free()
 
+func animation_handle():
+	var new_anim = ""
 
-
+	if abs(velocity.x) < 10 or inTower:
+		new_anim = "idle"
+	else:
+		new_anim = "walk"
+	
+	print(new_anim)
+	if animated_sprite.animation != new_anim:
+		animated_sprite.play(new_anim)
 		
 func inTowerSwitch():
 	if inTower:
