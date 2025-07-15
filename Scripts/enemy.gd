@@ -3,12 +3,17 @@ class_name Enemy
 
 @export var target: Node2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-@onready var wall_detection: RayCast2D = $WallDetection
+@onready var wall_detection_right: RayCast2D = $WallDetectionRight
+@onready var wall_detection_left: RayCast2D = $WallDetectionLeft
+
 
 var health = 3
 var damage = 1
+var jumpThreshold = 10 #This decides how slow the enemy has to be to decide to jump
+var tripleJump = 2
+var inTower = false
 
-const SPEED = 110.0
+const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 
 signal givePoint(point)
@@ -36,12 +41,10 @@ func set_movement_target(movement_target: Vector2):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if wall_detection.is_colliding():
-		velocity.y = JUMP_VELOCITY
+	pass
 
 func _physics_process(delta: float) -> void:
 	
-
 		
 	# direction calculation
 	if navigation_agent_2d.is_navigation_finished():
@@ -52,9 +55,20 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = current_agent_position.direction_to(next_path_position).x * SPEED 
 	
+	#Enemy Jump Logic
+	if wall_detection_right.is_colliding() or wall_detection_left.is_colliding():
+		velocity.y = JUMP_VELOCITY
+		tripleJump -= 1
+	if velocity.x < jumpThreshold and velocity.x > jumpThreshold * -1 and not inTower and tripleJump > 0:
+		print("SPEED LOW")
+		velocity.y = JUMP_VELOCITY
+		tripleJump -= 1
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
+	else:
+		tripleJump = 2
 		
 	move_and_slide()
 
@@ -67,6 +81,14 @@ func take_damage():
 		emit_signal("givePoint", 10)
 		queue_free()
 
+
+
+		
+func inTowerSwitch():
+	if inTower:
+		inTower = false
+	else:
+		inTower = true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:

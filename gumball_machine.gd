@@ -47,6 +47,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
 		damage_sources[body] = body.damage
+		body.inTowerSwitch()
 	
 	if body is Player:
 		playerIn = true
@@ -56,6 +57,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		damage_sources.erase(body)
+		body.inTowerSwitch()
 	
 	if body is Player:
 		playerIn = false
