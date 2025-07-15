@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cetlhwcaeripf"]
+[gd_scene load_steps=17 format=3 uid="uid://cetlhwcaeripf"]
 
 [ext_resource type="Script" uid="uid://cnxt102j160ru" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://t0tswtgg50q2" path="res://Assets/Sprites/Chef Pepperino walk jump.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://84hiamd4sgas" path="res://Assets/Sprites/croshair.png" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
 atlas = ExtResource("1_v0iea")
@@ -127,7 +128,10 @@ shape = SubResource("RectangleShape2D_ukyrk")
 position = Vector2(0, -6)
 
 [node name="ShootPoint" type="Marker2D" parent="TurnAxis"]
-position = Vector2(13, 0)
+position = Vector2(17, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="TurnAxis/ShootPoint"]
+texture = ExtResource("3_6t5aa")
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 

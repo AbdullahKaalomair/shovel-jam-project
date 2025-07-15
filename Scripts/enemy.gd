@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-@onready var target: Tower = $"../GumballMachine"
+@onready var target: Tower
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft
@@ -10,21 +10,22 @@ class_name Enemy
 
 var health = 3
 var damage = 1
-var jumpThreshold = 1 #This decides how slow the enemy has to be to decide to jump
-var tripleJump = 2
+var jumpThreshold = 10 #This decides how slow the enemy has to be to decide to jump
+var tripleJump = 3
 var inTower = false
 
 const SPEED = 110.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -350.0
 
 signal givePoint(point)
+signal death()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
-	navigation_agent_2d.path_desired_distance = 4.0
-	navigation_agent_2d.target_desired_distance = 4.0
+	navigation_agent_2d.path_desired_distance = 20.0
+	navigation_agent_2d.target_desired_distance = 0.01
 
 	# Make sure to not await during _ready.
 	actor_setup.call_deferred()
@@ -59,11 +60,12 @@ func _physics_process(delta: float) -> void:
 	animation_handle()
 	
 	#Enemy Jump Logic
-	if wall_detection_right.is_colliding() or wall_detection_left.is_colliding():
+	if (wall_detection_right.is_colliding() or wall_detection_left.is_colliding()) and tripleJump > 0:
 		velocity.y = JUMP_VELOCITY
 		tripleJump -= 1
-	if velocity.x < jumpThreshold and velocity.x > jumpThreshold * -1 and not inTower and tripleJump > 0:
-		print("SPEED LOW")
+		print(tripleJump)
+	if velocity.x < jumpThreshold and velocity.x > jumpThreshold * -1 and tripleJump > 0:
+		#print(tripleJump)
 		velocity.y = JUMP_VELOCITY
 		tripleJump -= 1
 	
@@ -71,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	else:
-		tripleJump = 2
+		tripleJump = 3
 		
 	move_and_slide()
 
@@ -79,9 +81,10 @@ func _physics_process(delta: float) -> void:
 func take_damage():
 	emit_signal("givePoint", 1)
 	health -= 1
-	print(health)
+	#print(health)
 	if health <= 0:
-		emit_signal("givePoint", 10)
+		emit_signal("givePoint", 5)
+		emit_signal("death")
 		queue_free()
 
 func animation_handle():
@@ -91,8 +94,6 @@ func animation_handle():
 		new_anim = "idle"
 	else:
 		new_anim = "walk"
-	
-	print(new_anim)
 	if animated_sprite.animation != new_anim:
 		animated_sprite.play(new_anim)
 		
@@ -105,3 +106,7 @@ func inTowerSwitch():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.get_hit(global_position)
+
+
+#func _on_jump_timer_timeout() -> void:
+	#pass # Replace with function body.

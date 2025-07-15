@@ -17,6 +17,7 @@ var ammo = 5
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 func _process(delta: float) -> void:
+	get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
 	Shoot()
 
 func _physics_process(delta: float) -> void:

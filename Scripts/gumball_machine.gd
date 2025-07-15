@@ -31,12 +31,10 @@ func _process(delta):
 		damage_timer = 0.0  # reset when not overlapping
 		
 	if playerIn and Input.is_action_just_pressed("interact") and score.money > 3:
-		player.ammo += 10
+		player.ammo += 3
 		score.money -= 3
 
 func take_damage(damage: int):
-	print(damage)
-	print(health)
 	health -= damage
 	hp_bar.value = health
 	if health % 2 == 0:
