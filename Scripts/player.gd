@@ -25,6 +25,9 @@ var gumballs = 0
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
 @onready var gumball_3: Sprite2D = $Gumballs/Gumball3
 
+#List of sounds
+const NO_BULLET = preload("res://Assets/Sounds/Player/No_Bullet.wav")
+const SHOOT_11 = preload("res://Assets/Sounds/Player/Shoot11.wav")
 
 const BULLET = preload("res://Scenes/bullet.tscn")
 
@@ -78,14 +81,28 @@ func _physics_process(delta: float) -> void:
 
 func Shoot():
 	if Input.is_action_just_pressed("shoot") and can_shoot:
+		get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+
 		if ammo > 0:
+			# Shooting logic
 			ammo -= 1
-			get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+
 			var bullet_instance = BULLET.instantiate()
 			bullet_instance.position = get_node("TurnAxis/ShootPoint").get_global_position()
 			bullet_instance.rotation = get_angle_to(get_global_mouse_position())
 			get_parent().add_child(bullet_instance)
+
+			# Set sound and play
+			if audio_stream_player_2d.stream != SHOOT_11:
+				audio_stream_player_2d.stream = SHOOT_11
 			audio_stream_player_2d.play()
+
+		else:
+			# Out of ammo sound
+			if audio_stream_player_2d.stream != NO_BULLET:
+				audio_stream_player_2d.stream = NO_BULLET
+			audio_stream_player_2d.play()
+	
 
 func handle_jump():
 	if is_on_floor(): air_jump = true

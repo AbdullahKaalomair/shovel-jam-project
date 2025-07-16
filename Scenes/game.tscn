@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://sxac10n7gvt6"]
 
-[ext_resource type="PackedScene" uid="uid://cetlhwcaeripf" path="res://Scenes/player.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://qipq5rqys2ab" path="res://Scenes/gumball.tscn" id="5_1l0tm"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
