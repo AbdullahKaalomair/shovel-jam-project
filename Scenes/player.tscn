@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cetlhwcaeripf"]
+[gd_scene load_steps=19 format=3 uid="uid://cetlhwcaeripf"]
 
 [ext_resource type="Script" uid="uid://cnxt102j160ru" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://t0tswtgg50q2" path="res://Assets/Sprites/Chef Pepperino walk jump.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://84hiamd4sgas" path="res://Assets/Sprites/croshair.png" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://d3sj0lecd6tmp" path="res://Assets/Sprites/gumball.png" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://0g3xaaa5penq" path="res://Assets/Sounds/Player/Shoot11.wav" id="5_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
 atlas = ExtResource("1_v0iea")
@@ -173,5 +174,8 @@ position = Vector2(0, -34)
 texture = ExtResource("4_vgqql")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fkybt")
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

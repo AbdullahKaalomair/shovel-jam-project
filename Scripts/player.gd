@@ -20,6 +20,7 @@ var gumballs = 0
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var gumball: Sprite2D = $Gumballs/Gumball
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
 @onready var gumball_3: Sprite2D = $Gumballs/Gumball3
@@ -81,6 +82,7 @@ func Shoot():
 			bullet_instance.position = get_node("TurnAxis/ShootPoint").get_global_position()
 			bullet_instance.rotation = get_angle_to(get_global_mouse_position())
 			get_parent().add_child(bullet_instance)
+			audio_stream_player_2d.play()
 
 func handle_jump():
 	if is_on_floor(): air_jump = true

@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+signal givePoint(point)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,5 +14,6 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and body.gumballs < 3:
+		emit_signal("givePoint", 3)
 		body.addGumball()
 		queue_free()

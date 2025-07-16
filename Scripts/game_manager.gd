@@ -54,7 +54,7 @@ func nextWave():
 		round_start_timer.start()
 		round += 1
 		enemy_number += 5
-		tower_location = randi_range(0, 5)
+		tower_location = randi_range(0, 4)
 		match tower_location:
 			0:
 				gumball_machine.position = tower_spawn_0.position

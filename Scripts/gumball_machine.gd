@@ -1,6 +1,6 @@
 extends StaticBody2D
 class_name Tower
-var max_health = 10
+var max_health = 10.0
 var health = 10
 var damage_sources := {}
 var damage_timer := 0.0
@@ -13,6 +13,8 @@ var playerIn = false
 
 @onready var hp_bar: ProgressBar = $UIControl/HealthBar
 @onready var sprite: Sprite2D = $Sprite
+
+signal givePoint(point)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,7 +39,8 @@ func _process(delta):
 		shop.open_shop()
 
 func sprite_handle():
-	var bar_per_sprite = int(max_health/6)
+	
+	var bar_per_sprite = ceil(max_health/5.0)
 	var bar = bar_per_sprite
 	var desired_sprite = 1
 	while bar <= health:
@@ -56,6 +59,7 @@ func take_damage(damage: int):
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
+	emit_signal("givePoint", 10)
 	for gumball in gumballs:
 				if health != max_health:
 					health = min(10, health + int(max_health/4))
