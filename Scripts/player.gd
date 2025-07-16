@@ -84,6 +84,7 @@ func get_hit(from_position: Vector2) -> void:
 		return
 		
 	ammo = max(ammo - 2, 0)
+	remove_gumballs(1)
 	
 	#Knockback
 	var direction = (global_position - from_position).normalized()

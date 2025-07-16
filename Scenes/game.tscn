@@ -558,12 +558,6 @@ wait_time = 3.0
 wait_time = 4.0
 one_shot = true
 
-[node name="Gumball" parent="Timers" instance=ExtResource("5_1l0tm")]
-position = Vector2(314, 397)
-
-[node name="Gumball2" parent="Timers" instance=ExtResource("5_1l0tm")]
-position = Vector2(223, 447)
-
 [node name="towerSpawnPoints" type="Node" parent="."]
 
 [node name="Spawn 0" type="Node2D" parent="towerSpawnPoints"]
@@ -594,6 +588,15 @@ And Lclick to shoot"
 
 [node name="Gumball" parent="." instance=ExtResource("5_1l0tm")]
 position = Vector2(399, 350)
+
+[node name="Gumball2" parent="." instance=ExtResource("5_1l0tm")]
+position = Vector2(314, 397)
+
+[node name="Gumball3" parent="." instance=ExtResource("5_1l0tm")]
+position = Vector2(223, 447)
+
+[node name="Gumball4" parent="." instance=ExtResource("5_1l0tm")]
+position = Vector2(192, 446)
 
 [connection signal="pressed" from="CanvasLayer/ResultContainer/VBoxContainer/RestartButton" to="GameManager" method="_on_restart_button_pressed"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="GameManager" method="_on_enemy_spawn_timer_timeout"]
