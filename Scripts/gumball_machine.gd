@@ -37,7 +37,7 @@ func _process(delta):
 		shop.open_shop()
 
 func sprite_handle():
-	var bar_per_sprite = max_health/6
+	var bar_per_sprite = int(max_health/6)
 	var bar = bar_per_sprite
 	var desired_sprite = 1
 	while bar <= health:
@@ -56,7 +56,6 @@ func take_damage(damage: int):
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
-	print (health + int(max_health/4))
 	for gumball in gumballs:
 				if health != max_health:
 					health = min(10, health + int(max_health/4))

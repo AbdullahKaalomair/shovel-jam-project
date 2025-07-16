@@ -8,6 +8,8 @@ var knockback_velocity := Vector2.ZERO
 const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 @export var hitstun_duration := 1.0  # seconds
 
+var air_jump = false
+var just_wall_jumped = false
 var is_invulnerable := false
 var ammo = 10
 var can_shoot = true
@@ -15,6 +17,8 @@ var gumballs = 0
 
 @onready var tower_interact_container: PanelContainer = $TowerInteractContainer
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
+@onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var gumball: Sprite2D = $Gumballs/Gumball
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
@@ -33,9 +37,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	handle_jump()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -80,6 +82,21 @@ func Shoot():
 			bullet_instance.rotation = get_angle_to(get_global_mouse_position())
 			get_parent().add_child(bullet_instance)
 
+func handle_jump():
+	if is_on_floor(): air_jump = true
+	
+	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = JUMP_VELOCITY
+			
+	elif not is_on_floor():
+		if Input.is_action_just_released("jump") and velocity.y < JUMP_VELOCITY / 2:
+			velocity.y = JUMP_VELOCITY / 2
+			
+		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
+			velocity.y = JUMP_VELOCITY * 0.8
+			air_jump = false
+
 func get_hit(from_position: Vector2) -> void:
 	if is_invulnerable:
 		return
@@ -116,7 +133,6 @@ func addGumball():
 			gumball_2.visible = true
 		3:
 			gumball_3.visible = true
-	print(gumballs)
 
 func remove_gumballs(used_gumballs):
 	gumballs -= used_gumballs

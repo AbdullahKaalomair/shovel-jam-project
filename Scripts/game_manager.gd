@@ -35,7 +35,6 @@ var tower_location = 0
 const PEPPERMINT_CANDY_ENEMY = preload("res://Scenes/Enemies/PeppermintCandyEnemy.tscn")
 
 func _on_enemy_give_point(point: Variant) -> void:
-	#print("points: " + str(money))
 	money += point
 	
 	
@@ -45,7 +44,6 @@ func _process(delta: float) -> void:
 	wave_number_label.text = str(round)
 	
 	if not gumball_machine:
-		print("game end")
 		result_container.visible = true
 		result_label.text = "You lose"
 		enemy_spawn_timer.stop()

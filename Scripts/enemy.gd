@@ -63,9 +63,7 @@ func _physics_process(delta: float) -> void:
 	if (wall_detection_right.is_colliding() or wall_detection_left.is_colliding()) and tripleJump > 0:
 		velocity.y = JUMP_VELOCITY
 		tripleJump -= 1
-		print(tripleJump)
 	if velocity.x < jumpThreshold and velocity.x > jumpThreshold * -1 and tripleJump > 0:
-		#print(tripleJump)
 		velocity.y = JUMP_VELOCITY
 		tripleJump -= 1
 	
@@ -81,7 +79,6 @@ func _physics_process(delta: float) -> void:
 func take_damage():
 	emit_signal("givePoint", 1)
 	health -= 1
-	#print(health)
 	if health <= 0:
 		emit_signal("givePoint", 5)
 		emit_signal("death")
