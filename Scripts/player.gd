@@ -10,6 +10,7 @@ const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 
 var is_invulnerable := false
 var ammo = 10
+var can_shoot = true
 var gumballs = 0
 
 @onready var tower_interact_container: PanelContainer = $TowerInteractContainer
@@ -70,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func Shoot():
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and can_shoot:
 		if ammo > 0:
 			ammo -= 1
 			get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
@@ -110,7 +111,6 @@ func addGumball():
 	gumballs += 1
 	match gumballs:
 		1:
-			print("SHOWETH YOUR BALLS")
 			gumball.visible = true
 		2:
 			gumball_2.visible = true

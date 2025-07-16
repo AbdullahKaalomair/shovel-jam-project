@@ -9,6 +9,7 @@ const DAMAGE_INTERVAL := 1.0  # damage every 1 second
 var playerIn = false
 @export var score: Node
 @export var player: Node2D
+@export var shop: Control
 
 @onready var hp_bar: ProgressBar = $UIControl/HealthBar
 @onready var sprite: Sprite2D = $Sprite
@@ -32,9 +33,8 @@ func _process(delta):
 	else:
 		damage_timer = 0.0  # reset when not overlapping
 		
-	if playerIn and Input.is_action_just_pressed("interact") and score.money > 3:
-		player.ammo += 3
-		score.money -= 3
+	if playerIn and Input.is_action_just_pressed("interact"):
+		shop.open_shop()
 
 func sprite_handle():
 	var bar_per_sprite = max_health/6
@@ -64,6 +64,12 @@ func heal_tower_gumballs(gumballs: int):
 	hp_bar.value = health
 	sprite_handle()
 	return used_gumballs
+
+func increase_max_hp():
+	max_health += 5
+	health = max_health
+	hp_bar.value = health
+	sprite_handle()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Enemy:

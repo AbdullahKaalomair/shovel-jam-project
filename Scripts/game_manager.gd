@@ -1,6 +1,6 @@
 extends Node
 
-var money = 0
+var money = 20
 var round = 1
 var enemy_number = 5
 var enemy_spawned = 0
@@ -70,6 +70,9 @@ func nextWave():
 				gumball_machine.position = tower_spawn_4.position
 	else:
 		result_container.visible = true
+	
+func losePoints(points: int):
+	money = max(0, money - points)
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:

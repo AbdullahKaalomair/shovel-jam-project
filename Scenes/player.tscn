@@ -151,7 +151,7 @@ grow_horizontal = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "Press E to use 3 points for ammo"
+text = "Press E to open shop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
