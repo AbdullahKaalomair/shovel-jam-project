@@ -56,7 +56,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite_2d.play("run")
 	else:
-		animated_sprite_2d.play("jump")
+		if velocity.y < 0:
+			animated_sprite_2d.play("jump_up")
+		else:
+			animated_sprite_2d.play("jump_down")
 	
 	# Apply player input movement
 	var move_input_x = 0.0
