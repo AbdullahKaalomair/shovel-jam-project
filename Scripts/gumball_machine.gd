@@ -1,7 +1,7 @@
 extends StaticBody2D
 class_name Tower
 var max_health = 10
-var health = max_health
+var health = 1
 var damage_sources := {}
 var damage_timer := 0.0
 const DAMAGE_INTERVAL := 1.0  # damage every 1 second
@@ -18,6 +18,7 @@ func _ready() -> void:
 	hp_bar.max_value = max_health
 	hp_bar.value = health
 	hp_bar.get("theme_override_styles/fill").texture.pause = false
+	sprite_handle()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,18 +36,36 @@ func _process(delta):
 		player.ammo += 3
 		score.money -= 3
 
+func sprite_handle():
+	var bar_per_sprite = max_health/6
+	var bar = bar_per_sprite
+	var desired_sprite = 1
+	while bar <= health:
+		desired_sprite += 1
+		bar += bar_per_sprite
+	sprite.frame = desired_sprite
+
 func take_damage(damage: int):
 	health -= damage
 	hp_bar.value = health
-	if health % 2 == 0:
-		sprite.frame -= 1
+	#if health % 2 == 0:
+		#sprite.frame -= 1
+	sprite_handle()
 	if health <= 0:
 		queue_free()
-	
-	
+
+func heal_tower_gumballs(gumballs: int):
+	var used_gumballs = 0 
+	print (health + int(max_health/4))
+	for gumball in gumballs:
+				if health != max_health:
+					health = min(10, health + int(max_health/4))
+					used_gumballs += 1
+	hp_bar.value = health
+	sprite_handle()
+	return used_gumballs
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body.name)
 	if body is Enemy:
 		damage_sources[body] = body.damage
 		body.inTowerSwitch()
@@ -54,6 +73,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		playerIn = true
 		body.enter_tower()
+		
+
+		if body.gumballs > 0:
+			var used_gumballs = heal_tower_gumballs(body.gumballs)
+			body.remove_gumballs(used_gumballs)
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

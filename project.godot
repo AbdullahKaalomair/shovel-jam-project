@@ -55,6 +55,7 @@ interact={
 2d_physics/layer_4="player bullets"
 2d_physics/layer_5="enemy bullets"
 2d_physics/layer_6="tower"
+2d_physics/layer_7="gumball"
 
 [rendering]
 

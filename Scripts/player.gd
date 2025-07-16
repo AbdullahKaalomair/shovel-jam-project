@@ -9,11 +9,17 @@ const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 @export var hitstun_duration := 1.0  # seconds
 
 var is_invulnerable := false
-var ammo = 5
+var ammo = 10
+var gumballs = 0
 
 @onready var tower_interact_container: PanelContainer = $TowerInteractContainer
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var gumball: Sprite2D = $Gumballs/Gumball
+@onready var gumball_2: Sprite2D = $Gumballs/Gumball2
+@onready var gumball_3: Sprite2D = $Gumballs/Gumball3
+
+
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 func _process(delta: float) -> void:
@@ -98,3 +104,30 @@ func enter_tower():
 
 func exit_tower():
 	tower_interact_container.visible = false
+	
+func addGumball():
+	gumballs += 1
+	match gumballs:
+		1:
+			print("SHOWETH YOUR BALLS")
+			gumball.visible = true
+		2:
+			gumball_2.visible = true
+		3:
+			gumball_3.visible = true
+	print(gumballs)
+
+func remove_gumballs(used_gumballs):
+	gumballs -= used_gumballs
+	match gumballs:
+		0:
+			gumball.visible = false
+			gumball_2.visible = false
+			gumball_3.visible = false
+		1:
+			gumball_2.visible = false
+			gumball_3.visible = false
+		2:
+			gumball_3.visible = false
+
+	

@@ -100,6 +100,9 @@ shape = SubResource("CircleShape2D_mfgve")
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_s2gcc")
 
+[node name="NavigationAgent2D" parent="." index="3"]
+debug_enabled = false
+
 [node name="WallDetectionRight" parent="." index="4"]
 position = Vector2(8, -6)
 target_position = Vector2(7, 0)
