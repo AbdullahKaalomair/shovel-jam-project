@@ -90,7 +90,7 @@ radius = 7.0
 position = Vector2(0, -6)
 scale = Vector2(1, 0.855)
 sprite_frames = SubResource("SpriteFrames_n0cs5")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -6)

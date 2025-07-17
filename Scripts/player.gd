@@ -157,7 +157,7 @@ func addGumball():
 			gumball_3.visible = true
 
 func remove_gumballs(used_gumballs):
-	gumballs -= used_gumballs
+	gumballs = max(0, gumballs - used_gumballs)
 	match gumballs:
 		0:
 			gumball.visible = false

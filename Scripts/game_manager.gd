@@ -33,6 +33,7 @@ var tower_location = 0
 
 
 const PEPPERMINT_CANDY_ENEMY = preload("res://Scenes/Enemies/PeppermintCandyEnemy.tscn")
+const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.tscn")
 
 func _on_enemy_give_point(point: Variant) -> void:
 	money += point

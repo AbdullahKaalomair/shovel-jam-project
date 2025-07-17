@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://coytic6gkvnst"]
+
+[ext_resource type="PackedScene" uid="uid://cnukdnaj3l13v" path="res://Scenes/enemy.tscn" id="1_1504v"]
+[ext_resource type="Script" uid="uid://cinmxtowa3w8" path="res://Scripts/enemy_flying.gd" id="2_e574g"]
+[ext_resource type="Texture2D" uid="uid://bktni8ny5htd0" path="res://Assets/Sprites/enemies/wrapped candyl.png" id="3_1haw0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t6g8"]
+atlas = ExtResource("3_1haw0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xel1t"]
+atlas = ExtResource("3_1haw0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4pnt"]
+atlas = ExtResource("3_1haw0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ptno"]
+atlas = ExtResource("3_1haw0")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ace1e"]
+atlas = ExtResource("3_1haw0")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jxbyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t6g8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xel1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4pnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ptno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ace1e")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="WrappedCandyEnemy" instance=ExtResource("1_1504v")]
+script = ExtResource("2_e574g")
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_jxbyi")
+animation = &"idle"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -3.5)
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, -3.5)
+
+[node name="WallDetectionRight" parent="." index="4"]
+visible = false
+
+[node name="WallDetectionLeft" parent="." index="5"]
+visible = false

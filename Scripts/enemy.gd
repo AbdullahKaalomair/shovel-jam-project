@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-@onready var target: Tower
+var target: Tower
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft
@@ -40,25 +40,28 @@ func actor_setup():
 func set_movement_target(movement_target: Vector2):
 	navigation_agent_2d.target_position = movement_target
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _physics_process(delta: float) -> void:
-	
-		
 	# direction calculation
 	if navigation_agent_2d.is_navigation_finished():
 		return
-
-	var current_agent_position: Vector2 = global_position
-	var next_path_position: Vector2 = navigation_agent_2d.get_next_path_position()
-
-	velocity.x = current_agent_position.direction_to(next_path_position).x * SPEED 
+	
+	apply_speed()
 	
 	animation_handle()
 	
+	jump_logic()
+	
+	apply_gravity(delta)
+		
+	move_and_slide()
+
+func apply_speed():
+	var current_agent_position: Vector2 = global_position
+	var next_path_position: Vector2 = navigation_agent_2d.get_next_path_position()
+
+	velocity.x = current_agent_position.direction_to(next_path_position).x * SPEED
+
+func jump_logic():
 	#Enemy Jump Logic
 	if (wall_detection_right.is_colliding() or wall_detection_left.is_colliding()) and tripleJump > 0:
 		velocity.y = JUMP_VELOCITY
@@ -66,16 +69,14 @@ func _physics_process(delta: float) -> void:
 	if velocity.x < jumpThreshold and velocity.x > jumpThreshold * -1 and tripleJump > 0:
 		velocity.y = JUMP_VELOCITY
 		tripleJump -= 1
-	
+
+func apply_gravity(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	else:
 		tripleJump = 3
-		
-	move_and_slide()
-
-
+	
 func take_damage():
 	emit_signal("givePoint", 1)
 	health -= 1
@@ -87,11 +88,12 @@ func take_damage():
 func animation_handle():
 	var new_anim = ""
 
-	if abs(velocity.x) < 10 or inTower:
+	if abs(velocity.x) < 1:
 		new_anim = "idle"
 	else:
 		new_anim = "walk"
 	if animated_sprite.animation != new_anim:
+		print("idle")
 		animated_sprite.play(new_anim)
 		
 func inTowerSwitch():
