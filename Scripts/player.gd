@@ -10,6 +10,8 @@ const KNOCKBACK_DECAY := 2200.0  # tweak to make knockback fade out
 
 var air_jump = false
 var just_wall_jumped = false
+var was_wall_normal = Vector2.ZERO
+
 var is_invulnerable := false
 var ammo = 10
 var can_shoot = true
@@ -18,6 +20,7 @@ var gumballs = 0
 @onready var tower_interact_container: PanelContainer = $TowerInteractContainer
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
+@onready var wall_jump_timer: Timer = $WallJumpTimer
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -40,7 +43,8 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	handle_wall_jump()
 	handle_jump()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -77,7 +81,20 @@ func _physics_process(delta: float) -> void:
 	# Combine movement and knockback
 	velocity.x = move_input_x + knockback_velocity.x
 		
+	var was_on_floor = is_on_floor()
+	var was_on_wall = is_on_wall_only()
+	if was_on_wall:
+		was_wall_normal = get_wall_normal()
 	move_and_slide()
+	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
+	if just_left_ledge:
+		coyote_jump_timer.start()
+	#if Input.is_action_just_pressed("ui_accept"):
+		#movement_data = load("res://FasterMovementDara.tres")
+	just_wall_jumped = false
+	var just_left_wall = was_on_wall and not is_on_wall()
+	if just_left_wall:
+		wall_jump_timer.start()
 
 func Shoot():
 	if Input.is_action_just_pressed("shoot") and can_shoot:
@@ -118,6 +135,20 @@ func handle_jump():
 		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
 			velocity.y = JUMP_VELOCITY * 0.8
 			air_jump = false
+
+func handle_wall_jump():
+	if not is_on_wall_only(): return
+	var wall_normal = get_wall_normal()
+	if wall_jump_timer.time_left > 0 :
+		wall_normal = was_wall_normal
+	if Input.is_action_just_pressed("move_left") and wall_normal == Vector2.LEFT:
+		velocity.x = wall_normal.x * SPEED
+		velocity.y = JUMP_VELOCITY
+		just_wall_jumped = true
+	if Input.is_action_just_pressed("move_right") and wall_normal == Vector2.RIGHT:
+		velocity.x = wall_normal.x * SPEED
+		velocity.y = JUMP_VELOCITY
+		just_wall_jumped = true
 
 func get_hit(from_position: Vector2) -> void:
 	if is_invulnerable:

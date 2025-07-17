@@ -456,7 +456,7 @@ position = Vector2(-8, -8)
 navigation_polygon = SubResource("NavigationPolygon_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(-97, -9)
+position = Vector2(-511, 40)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)

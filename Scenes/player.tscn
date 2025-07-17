@@ -224,6 +224,9 @@ texture = ExtResource("4_vgqql")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 
+[node name="WallJumpTimer" type="Timer" parent="."]
+wait_time = 0.15
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
