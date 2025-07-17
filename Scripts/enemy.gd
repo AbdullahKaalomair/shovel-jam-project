@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-@onready var target: Tower = $"../GumballMachine"
+@onready var target: Tower 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft

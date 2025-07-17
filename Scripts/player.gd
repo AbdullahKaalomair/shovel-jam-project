@@ -119,22 +119,28 @@ func Shoot():
 			if audio_stream_player_2d.stream != NO_BULLET:
 				audio_stream_player_2d.stream = NO_BULLET
 			audio_stream_player_2d.play()
-	
 
 func handle_jump():
-	if is_on_floor(): air_jump = true
-	
+	if is_on_floor(): 
+		
+		air_jump = true  # Allow air jump again when landing
+
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
-			
+
 	elif not is_on_floor():
+		# Cut jump short if released early
 		if Input.is_action_just_released("jump") and velocity.y < JUMP_VELOCITY / 2:
-			velocity.y = JUMP_VELOCITY / 2
 			
+			velocity.y = JUMP_VELOCITY / 2
+		
+		# Double jump only if air_jump is still true
 		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
+			
 			velocity.y = JUMP_VELOCITY * 0.8
-			air_jump = false
+			air_jump = false  # 🔑 Prevent further jumps until landing
+
 
 func handle_wall_jump():
 	if not is_on_wall_only(): return
@@ -186,7 +192,8 @@ func addGumball():
 			gumball_2.visible = true
 		3:
 			gumball_3.visible = true
-
+	
+	
 func remove_gumballs(used_gumballs):
 	gumballs = max(0, gumballs - used_gumballs)
 	match gumballs:

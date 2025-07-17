@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://byadqe1liuwc2"]
+[gd_scene load_steps=6 format=3 uid="uid://byadqe1liuwc2"]
 
 [ext_resource type="Script" uid="uid://cdylyuaqlfljh" path="res://Scripts/shop_keeper.gd" id="1_ggbpv"]
 [ext_resource type="Texture2D" uid="uid://1rkfgqcbhilu" path="res://Assets/Sprites/Shop/Chef Pepperino1.png" id="2_j55qq"]
@@ -7,8 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xiuhi"]
 size = Vector2(16, 17)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ggbpv"]
+radius = 1.37437
+
 [node name="ShopKeeper" type="StaticBody2D"]
 scale = Vector2(3, 3)
+collision_layer = 128
 script = ExtResource("1_ggbpv")
 
 [node name="ChefPepperino1" type="Sprite2D" parent="."]
@@ -26,6 +30,10 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_xiuhi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.33333)
+shape = SubResource("CircleShape2D_ggbpv")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

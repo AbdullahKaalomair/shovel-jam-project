@@ -6,7 +6,10 @@ var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
-var tower_location = 0
+var enemy_chosen = 1
+var tower_location = randi_range(1,4)
+var gumball_location = randi_range(1,8)
+var gumball_spawned = []
 
 @onready var gumball_machine: Tower = $"../GumballMachine"
 @onready var player: Player = $"../Player"
@@ -16,6 +19,7 @@ var tower_location = 0
 @onready var result_label: Label = $"../CanvasLayer/ResultContainer/VBoxContainer/ResultLabel"
 @onready var enemy_spawn_timer: Timer = $"../Timers/EnemySpawnTimer"
 @onready var round_start_timer: Timer = $"../Timers/RoundStartTimer"
+@onready var gumball_spawn_timer: Timer = $"../Timers/GumballSpawnTimer"
 @onready var result_container: PanelContainer = $"../CanvasLayer/ResultContainer"
 
 
@@ -30,15 +34,38 @@ var tower_location = 0
 @onready var tower_spawn_3: Node2D = $"../towerSpawnPoints/Spawn 3"
 @onready var tower_spawn_4: Node2D = $"../towerSpawnPoints/Spawn 4"
 
-
+@onready var gumball_spawn_1: Node2D = $"../GumballSpawnPoints/Spawn 1"
+@onready var gumball_spawn_2: Node2D = $"../GumballSpawnPoints/Spawn 2"
+@onready var gumball_spawn_3: Node2D = $"../GumballSpawnPoints/Spawn 3"
+@onready var gumball_spawn_4: Node2D = $"../GumballSpawnPoints/Spawn 4"
+@onready var gumball_spawn_5: Node2D = $"../GumballSpawnPoints/Spawn 5"
+@onready var gumball_spawn_6: Node2D = $"../GumballSpawnPoints/Spawn 6"
+@onready var gumball_spawn_7: Node2D = $"../GumballSpawnPoints/Spawn 7"
+@onready var gumball_spawn_8: Node2D = $"../GumballSpawnPoints/Spawn 8"
 
 const PEPPERMINT_CANDY_ENEMY = preload("res://Scenes/Enemies/PeppermintCandyEnemy.tscn")
 const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.tscn")
+const GUMBALL = preload("res://Scenes/gumball.tscn")
 
 func _on_enemy_give_point(point: Variant) -> void:
 	money += point
 	
+func _ready():
+	gumball_spawn_timer.wait_time = randi_range(5, 20)
+	gumball_spawn_timer.start()
 	
+	match tower_location:
+		0:
+			gumball_machine.position = tower_spawn_0.position
+		1:
+			gumball_machine.position = tower_spawn_1.position
+		2:
+			gumball_machine.position = tower_spawn_2.position
+		3:
+			gumball_machine.position = tower_spawn_3.position
+		4:
+			gumball_machine.position = tower_spawn_4.position
+
 func _process(delta: float) -> void:
 	ammo_number_label.text = str(player.ammo)
 	point_number_label.text = str(money)
@@ -55,7 +82,7 @@ func nextWave():
 		round_start_timer.start()
 		round += 1
 		enemy_number += 5
-		tower_location = randi_range(0, 4)
+		tower_location = randi_range(1, 4)
 		match tower_location:
 			0:
 				gumball_machine.position = tower_spawn_0.position
@@ -76,12 +103,19 @@ func losePoints(points: int):
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
+		enemy_chosen = randi_range(1,2)
 		enemy_spawn_point = randi_range(1, 4)
 		#To ensure the enemy doesnt spawn where the tower is
 		while enemy_spawn_point == tower_location:
 			enemy_spawn_point = randi_range(1, 4)
-		
-		var enemy = PEPPERMINT_CANDY_ENEMY.instantiate()
+			
+		var enemy
+		match enemy_chosen:
+			1:
+				enemy = PEPPERMINT_CANDY_ENEMY.instantiate()
+			2:
+				enemy = WRAPPED_CANDY_ENEMY.instantiate()
+
 		enemy.target = gumball_machine
 		match enemy_spawn_point:
 			1:
@@ -96,14 +130,15 @@ func _on_enemy_spawn_timer_timeout() -> void:
 		enemy.givePoint.connect(_on_enemy_give_point)
 		enemy.death.connect(_on_enemy_death)
 		enemy_spawned += 1
-		
-		
+
 
 func _on_enemy_death():
 	enemy_killed += 1
 	if enemy_killed == enemy_number + 1:
 		nextWave()
 
+func _on_gumball_player_pickup(gumball_spawn_num):
+	gumball_spawned.erase(gumball_spawn_num)
 
 func _on_round_start_timer_timeout() -> void:
 	enemy_spawn_timer.start()
@@ -111,3 +146,35 @@ func _on_round_start_timer_timeout() -> void:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_gumball_spawn_timer_timeout() -> void:
+	if gumball_spawned.size() < 6:
+		
+		while gumball_spawned.has(gumball_location):
+			gumball_location = randi_range(1, 8)
+		#To ensure the enemy doesnt spawn where the tower is
+		var gumball = GUMBALL.instantiate()
+		gumball.gumball_spawn_num = gumball_location
+		match gumball_location:
+			1:
+				gumball.position = gumball_spawn_1.position
+			2:
+				gumball.position = gumball_spawn_2.position
+			3:
+				gumball.position = gumball_spawn_3.position
+			4:
+				gumball.position = gumball_spawn_4.position
+			5:
+				gumball.position = gumball_spawn_5.position
+			6:
+				gumball.position = gumball_spawn_6.position
+			7:
+				gumball.position = gumball_spawn_7.position
+			8:
+				gumball.position = gumball_spawn_8.position
+		add_child(gumball)
+		gumball.givePoint.connect(_on_enemy_give_point)
+		gumball_spawned.append(gumball_location)
+		gumball_spawn_timer.wait_time = randi_range(5, 20)
+		gumball_spawn_timer.start()

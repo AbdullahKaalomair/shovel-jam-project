@@ -43,7 +43,7 @@ func sprite_handle():
 	var bar = bar_per_sprite
 	var desired_sprite = 1
 	while bar <= health:
-		desired_sprite += 1
+		desired_sprite = min(5, desired_sprite + 1)
 		bar += bar_per_sprite
 	sprite.frame = desired_sprite
 

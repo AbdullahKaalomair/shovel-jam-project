@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://sxac10n7gvt6"]
+[gd_scene load_steps=10 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
-[ext_resource type="PackedScene" uid="uid://coytic6gkvnst" path="res://Scenes/Enemies/wrapped_candy_enemy.tscn" id="7_1l0tm"]
-[ext_resource type="PackedScene" uid="uid://m6r45hdqfvbf" path="res://Scenes/Enemies/PeppermintCandyEnemy.tscn" id="8_v158k"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="9_h4fw4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3dryh"]
@@ -456,14 +454,14 @@ position = Vector2(-8, -8)
 navigation_polygon = SubResource("NavigationPolygon_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(-511, 40)
+position = Vector2(-29, -4)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="GumballMachine" parent="." node_paths=PackedStringArray("score", "player") instance=ExtResource("3_wrm1d")]
-position = Vector2(751, -129)
+position = Vector2(1013, -170)
 score = NodePath("../GameManager")
 player = NodePath("../Player")
 
@@ -550,29 +548,30 @@ anchor_bottom = 0.5
 [node name="enemySpawnPoints" type="Node" parent="."]
 
 [node name="Spawn 1" type="Node2D" parent="enemySpawnPoints"]
-visible = false
-position = Vector2(177, 436)
+position = Vector2(-84, 352)
 
 [node name="Spawn 2" type="Node2D" parent="enemySpawnPoints"]
-visible = false
-position = Vector2(170, 133)
+position = Vector2(-333, -179)
 
 [node name="Spawn 3" type="Node2D" parent="enemySpawnPoints"]
-visible = false
-position = Vector2(821, 127)
+position = Vector2(690, -149)
 
 [node name="Spawn 4" type="Node2D" parent="enemySpawnPoints"]
-visible = false
-position = Vector2(836, 439)
+position = Vector2(406, 334)
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="EnemySpawnTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
+autostart = true
 
 [node name="RoundStartTimer" type="Timer" parent="Timers"]
 wait_time = 4.0
 one_shot = true
+
+[node name="GumballSpawnTimer" type="Timer" parent="Timers"]
+one_shot = true
+autostart = true
 
 [node name="towerSpawnPoints" type="Node" parent="."]
 
@@ -581,20 +580,16 @@ visible = false
 position = Vector2(509, 304)
 
 [node name="Spawn 1" type="Node2D" parent="towerSpawnPoints"]
-visible = false
-position = Vector2(203, 448)
+position = Vector2(-293, 368)
 
 [node name="Spawn 2" type="Node2D" parent="towerSpawnPoints"]
-visible = false
-position = Vector2(203, 144)
+position = Vector2(-398, -208)
 
 [node name="Spawn 3" type="Node2D" parent="towerSpawnPoints"]
-visible = false
-position = Vector2(805, 144)
+position = Vector2(747, -128)
 
 [node name="Spawn 4" type="Node2D" parent="towerSpawnPoints"]
-visible = false
-position = Vector2(805, 448)
+position = Vector2(406, 352)
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -608,17 +603,38 @@ text = "Use WASD to move,
 Mouse to aim,
 And Lclick to shoot"
 
-[node name="WrappedCandyEnemy" parent="." instance=ExtResource("7_1l0tm")]
-position = Vector2(-391, -226)
-
-[node name="PeppermintCandyEnemy" parent="." instance=ExtResource("8_v158k")]
-position = Vector2(-427, -217)
-
 [node name="ShopKeeper" parent="." node_paths=PackedStringArray("shop") instance=ExtResource("9_h4fw4")]
 position = Vector2(24, 16)
 shop = NodePath("../CanvasLayer/Shop")
+
+[node name="GumballSpawnPoints" type="Node" parent="."]
+
+[node name="Spawn 1" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(35, 224)
+
+[node name="Spawn 2" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(-303, -160)
+
+[node name="Spawn 3" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(522, -224)
+
+[node name="Spawn 4" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(400, 160)
+
+[node name="Spawn 5" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(-533, -114)
+
+[node name="Spawn 6" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(746, 352)
+
+[node name="Spawn 7" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(882, 97)
+
+[node name="Spawn 8" type="Node2D" parent="GumballSpawnPoints"]
+position = Vector2(-199, 127)
 
 [connection signal="givePoint" from="GumballMachine" to="GameManager" method="_on_enemy_give_point"]
 [connection signal="pressed" from="CanvasLayer/ResultContainer/VBoxContainer/RestartButton" to="GameManager" method="_on_restart_button_pressed"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="GameManager" method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/RoundStartTimer" to="GameManager" method="_on_round_start_timer_timeout"]
+[connection signal="timeout" from="Timers/GumballSpawnTimer" to="GameManager" method="_on_gumball_spawn_timer_timeout"]

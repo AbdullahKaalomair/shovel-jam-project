@@ -223,6 +223,8 @@ position = Vector2(0, -34)
 texture = ExtResource("4_vgqql")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.15
