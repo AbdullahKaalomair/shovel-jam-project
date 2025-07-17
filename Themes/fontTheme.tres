@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://btgkekqj6tral"]
+
+[ext_resource type="FontFile" uid="uid://bl1anw7ut5kqi" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_8vrxr"]
+
+[resource]
+Button/fonts/font = ExtResource("1_8vrxr")
+Label/fonts/font = ExtResource("1_8vrxr")
