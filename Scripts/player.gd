@@ -140,10 +140,10 @@ func _on_invulnerability_timer_timeout() -> void:
 	is_invulnerable = false
 	modulate = Color(1, 1, 1)  # Reset color
 
-func enter_tower():
+func enter_shop():
 	tower_interact_container.visible = true
 
-func exit_tower():
+func exit_shop():
 	tower_interact_container.visible = false
 	
 func addGumball():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t0tswtgg50q2"
-path="res://.godot/imported/Chef Pepperino walk jump.png-6978445cc4e4ee6d1e162b4c26960b3f.ctex"
+uid="uid://1rkfgqcbhilu"
+path="res://.godot/imported/Chef Pepperino1.png-5c97f6a0859668e27d4a0849724ee9c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Chef Pepperino walk jump.png"
-dest_files=["res://.godot/imported/Chef Pepperino walk jump.png-6978445cc4e4ee6d1e162b4c26960b3f.ctex"]
+source_file="res://Assets/Sprites/Shop/Chef Pepperino1.png"
+dest_files=["res://.godot/imported/Chef Pepperino1.png-5c97f6a0859668e27d4a0849724ee9c5.ctex"]
 
 [params]
 

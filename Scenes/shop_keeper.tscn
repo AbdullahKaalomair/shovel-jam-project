@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://byadqe1liuwc2"]
+
+[ext_resource type="Script" uid="uid://cdylyuaqlfljh" path="res://Scripts/shop_keeper.gd" id="1_ggbpv"]
+[ext_resource type="Texture2D" uid="uid://1rkfgqcbhilu" path="res://Assets/Sprites/Shop/Chef Pepperino1.png" id="2_j55qq"]
+[ext_resource type="Texture2D" uid="uid://hi552pmbivh1" path="res://Assets/Sprites/Shop/BiscuitTable.png" id="3_sp003"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xiuhi"]
+size = Vector2(16, 17)
+
+[node name="ShopKeeper" type="StaticBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_ggbpv")
+
+[node name="ChefPepperino1" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_j55qq")
+
+[node name="BiscuitTable" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, -6)
+scale = Vector2(0.875, 0.75)
+texture = ExtResource("3_sp003")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -8.5)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xiuhi")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

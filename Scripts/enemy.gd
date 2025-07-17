@@ -24,7 +24,7 @@ signal death()
 func _ready():
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
-	navigation_agent_2d.path_desired_distance = 20.0
+	navigation_agent_2d.path_desired_distance = 10.0
 	navigation_agent_2d.target_desired_distance = 0.01
 
 	# Make sure to not await during _ready.

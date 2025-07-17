@@ -71,3 +71,7 @@ visible = false
 
 [node name="WallDetectionLeft" parent="." index="5"]
 visible = false
+
+[node name="CielingDetector" type="RayCast2D" parent="." index="7"]
+position = Vector2(0, -7)
+target_position = Vector2(0, -17)
