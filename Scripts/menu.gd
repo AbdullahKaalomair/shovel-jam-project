@@ -19,6 +19,7 @@ var is_credits_being_watched = false
 @onready var canvas_modulate = $MenuObjects/CanvasModulate
 
 var menu_music = preload("res://Assets/Sounds/Menu/Christmas synths.ogg")
+var coin_se = preload("res://Assets/Sounds/Menu/Coins5.mp3")
 var crank_se = preload("res://Assets/Sounds/Menu/crank.mp3")
 
 var base_energy = 1.2
@@ -28,6 +29,9 @@ func _ready() -> void:
 	menu_container.visible = false
 	start_container.visible = true
 	credits_container.visible = false
+	canvas_modulate.visible = true
+	machine_light.visible = true
+	text_light.visible = true
 
 func _input(event: InputEvent) -> void:
 	if not is_start_animation_playing and event.is_pressed():
@@ -74,6 +78,10 @@ func _on_light_flicker_timer_timeout() -> void:
 func end_credits() -> void:
 	credits_container.visible = false
 	is_credits_being_watched = false
+
+func play_coin_noise() -> void:
+	se_audio_player.stream = coin_se
+	se_audio_player.play()
 
 func play_crank_noise() -> void:
 	se_audio_player.stream = crank_se
