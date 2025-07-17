@@ -6,6 +6,7 @@ class_name Enemy
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft
+@onready var hit_timer: Timer = $HitTimer
 
 
 var health = 3
@@ -29,6 +30,9 @@ func _ready():
 
 	# Make sure to not await during _ready.
 	actor_setup.call_deferred()
+	
+	# Make sure the shader is unique for each enemy.
+	animated_sprite.material = animated_sprite.material.duplicate()
 
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
@@ -80,6 +84,7 @@ func apply_gravity(delta):
 func take_damage():
 	emit_signal("givePoint", 1)
 	health -= 1
+	activate_hit_shader_effect()
 	if health <= 0:
 		emit_signal("givePoint", 5)
 		emit_signal("death")
@@ -107,5 +112,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.get_hit(global_position)
 
 
+func activate_hit_shader_effect() -> void:
+	animated_sprite.material.set_shader_parameter("active", true)
+	hit_timer.start()
+
 #func _on_jump_timer_timeout() -> void:
 	#pass # Replace with function body.
+
+
+func _on_hit_timer_timeout() -> void:
+	animated_sprite.material.set_shader_parameter("active", false)

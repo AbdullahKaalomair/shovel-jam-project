@@ -1,7 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnukdnaj3l13v"]
+[gd_scene load_steps=8 format=3 uid="uid://cnukdnaj3l13v"]
 
 [ext_resource type="Script" uid="uid://cuyiknvhgw66f" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://gj57uu6c2r4v" path="res://Assets/Sprites/black.jpg" id="1_hghv2"]
+
+[sub_resource type="Shader" id="Shader_1f0kj"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afpow"]
+shader = SubResource("Shader_1f0kj")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
 animations = [{
@@ -26,6 +48,7 @@ collision_mask = 33
 script = ExtResource("1_1f0kj")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_afpow")
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_1f0kj")
 
@@ -57,5 +80,9 @@ target_position = Vector2(-9, 0)
 wait_time = 3.0
 one_shot = true
 
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="jumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
