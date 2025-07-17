@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8qlpb15j1vy"]
 
 [ext_resource type="Script" uid="uid://jhoq3dsbytf7" path="res://Scripts/menu.gd" id="1_1rerr"]
-[ext_resource type="Theme" uid="uid://btgkekqj6tral" path="res://Themes/fontTheme.tres" id="2_xhh6f"]
+[ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="2_xhh6f"]
 [ext_resource type="AudioStream" uid="uid://bt22rkepshywe" path="res://Assets/Sounds/Menu/Vast-Places_Looping.mp3" id="3_cayip"]
 
 [node name="Menu" type="Control"]
