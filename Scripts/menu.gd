@@ -4,29 +4,38 @@ var game_scene = "res://Scenes/game.tscn"
 var tutorial_scene = ""
 var options_scene = ""
 
+var is_start_animation_playing = false
 var is_game_started = false
 var is_credits_being_watched = false
 
 @onready var menu_container = $MenuMarginContainer
 @onready var credits_container = $CreditsMarginContainer
 @onready var start_container = $StartMarginContainer
-@onready var audio_player = $AudioStreamPlayer
+@onready var bg_audio_player = $BGAudioStreamPlayer
+@onready var se_audio_player = $SEAudioStreamPlayer
+@onready var anim_player = $AnimationPlayer
+@onready var machine_light = $MenuObjects/MachineLight
+@onready var text_light = $MenuObjects/TextLight
+@onready var canvas_modulate = $MenuObjects/CanvasModulate
 
 var menu_music = preload("res://Assets/Sounds/Menu/Christmas synths.ogg")
+var crank_se = preload("res://Assets/Sounds/Menu/crank.mp3")
+
+var base_energy = 1.2
+var flicker_range = 0.2
 
 func _ready() -> void:
-	is_game_started = false
 	menu_container.visible = false
 	start_container.visible = true
 	credits_container.visible = false
 
 func _input(event: InputEvent) -> void:
-	if not is_game_started and event.is_pressed():
+	if not is_start_animation_playing and event.is_pressed():
+		is_start_animation_playing = true
+		anim_player.play("Start_Machine")
+	elif not is_game_started and is_start_animation_playing and event.is_pressed():
+		skip_animation()
 		is_game_started = true
-		menu_container.visible = true
-		start_container.visible = false
-		audio_player.stream = menu_music
-		audio_player.play()
 	else:
 		if is_credits_being_watched and event.is_action_pressed("ui_cancel"):
 			end_credits()
@@ -56,6 +65,31 @@ func _on_scroll_container_end_reached() -> void:
 	end_credits()
 
 
+func _on_light_flicker_timer_timeout() -> void:
+	var random_energy = randf_range(-flicker_range, flicker_range)
+	machine_light.energy = base_energy + random_energy
+	text_light.energy = base_energy + random_energy
+
+
 func end_credits() -> void:
 	credits_container.visible = false
 	is_credits_being_watched = false
+
+func play_crank_noise() -> void:
+	se_audio_player.stream = crank_se
+	se_audio_player.play()
+
+func start_pressed() -> void:
+	menu_container.visible = true
+	start_container.visible = false
+	bg_audio_player.stream = menu_music
+	bg_audio_player.play()
+	canvas_modulate.visible = false
+	machine_light.visible = false
+	text_light.visible = false
+	is_game_started = true
+
+func skip_animation() -> void:
+	var anim_name = anim_player.current_animation
+	var length = anim_player.get_animation(anim_name).length
+	anim_player.seek(length, true)

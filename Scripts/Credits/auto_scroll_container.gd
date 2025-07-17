@@ -9,7 +9,7 @@ var timer : Timer = Timer.new()
 
 @export var auto_scroll_speed: float = 60.0
 @export var input_scroll_speed : float = 400.0
-@export var scroll_restart_delay : float = 1.5
+@export var scroll_restart_delay : float = 0.5
 
 var _current_scroll_position : float = 0.0
 var scroll_paused : bool = false
