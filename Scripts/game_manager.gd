@@ -128,7 +128,7 @@ func show_wave_message():
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
-		enemy_chosen = 2
+		enemy_chosen = randi_range(1,2)
 		enemy_spawn_point = randi_range(1, 4)
 		#To ensure the enemy doesnt spawn where the tower is
 		while enemy_spawn_point == tower_location:
