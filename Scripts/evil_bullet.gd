@@ -1,10 +1,10 @@
 extends RigidBody2D
 
-const projectile_speed = 400
+
+const projectile_speed = 1
 #const ENEMY = preload("res://Scenes/enemy.tscn")
 
 func _ready() -> void:
-	print("MOOOVE")
 	linear_velocity = Vector2(projectile_speed, 0).rotated(rotation)
  
 

@@ -1,5 +1,6 @@
 extends StaticBody2D
 class_name Tower
+
 var max_health = 10.0
 var health = 10
 var damage_sources := {}
@@ -7,7 +8,6 @@ var damage_timer := 0.0
 const DAMAGE_INTERVAL := 1.0  # damage every 1 second
 
 var playerIn = false
-@export var score: Node
 @export var player: Node2D
 
 

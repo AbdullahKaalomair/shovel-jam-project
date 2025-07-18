@@ -81,7 +81,7 @@ func apply_gravity(delta):
 	else:
 		tripleJump = 3
 	
-func take_damage():
+func take_damage(damage: int):
 	emit_signal("givePoint", 1)
 	health -= 1
 	activate_hit_shader_effect()

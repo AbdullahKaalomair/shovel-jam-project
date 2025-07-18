@@ -165,7 +165,7 @@ func get_hit(from_position: Vector2) -> void:
 	if is_invulnerable:
 		return
 		
-	ammo = max(ammo - 2, 0)
+	ammo = max(ammo - 25, 0)
 	remove_gumballs(1)
 	
 	#Knockback
