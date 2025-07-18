@@ -21,6 +21,7 @@ var gumball_spawned = []
 @onready var round_start_timer: Timer = $"../Timers/RoundStartTimer"
 @onready var gumball_spawn_timer: Timer = $"../Timers/GumballSpawnTimer"
 @onready var result_container: PanelContainer = $"../CanvasLayer/ResultContainer"
+@onready var wave_container: PanelContainer = $"../CanvasLayer/WaveContainer"
 
 
 @onready var spawn_1: Node2D = $"../enemySpawnPoints/Spawn 1"
@@ -77,7 +78,9 @@ func _process(delta: float) -> void:
 		enemy_spawn_timer.stop()
 		
 func nextWave():
+	
 	if round < 3:
+		show_wave_message()
 		enemy_spawn_timer.stop()
 		round_start_timer.start()
 		round += 1
@@ -101,6 +104,24 @@ func nextWave():
 func losePoints(points: int):
 	money = max(0, money - points)
 	
+func show_wave_message():
+	wave_container.modulate.a = 0.0
+	wave_container.show()
+
+	var tween = create_tween()
+
+	# Fade in
+	tween.tween_property(wave_container, "modulate:a", 1.0, 1.0)
+	
+	# Wait visible for 2 seconds
+	tween.tween_interval(2.0)
+	
+	# Fade out
+	tween.tween_property(wave_container, "modulate:a", 0.0, 1.0)
+
+	# Optionally hide after
+	tween.tween_callback(wave_container.hide)
+
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
