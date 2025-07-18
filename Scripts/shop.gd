@@ -7,6 +7,9 @@ extends Control
 @onready var shop: Control = $"."
 @onready var tower_hp_button: Button = $ShopContainer/MarginContainer/GridContainer/TowerHPButton
 @onready var ammo_button: Button = $ShopContainer/MarginContainer/GridContainer/AmmoButton
+@onready var speed_button: Button = $ShopContainer/MarginContainer/GridContainer/SpeedButton
+
+var speed_boost_price = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,6 +29,9 @@ func open_shop() -> void:
 	if game_manager.money >= 10:
 		ammo_button.disabled = false
 	
+	if game_manager.money >= speed_boost_price:
+		speed_button.disabled = false
+	
 
 func _on_tower_hp_button_pressed() -> void:
 	gumball_machine.increase_max_hp()
@@ -44,3 +50,10 @@ func _on_ammo_button_pressed() -> void:
 	game_manager.losePoints(10)
 	if game_manager.money < 10:
 		ammo_button.disabled = true
+
+
+func _on_speed_button_pressed() -> void:
+	player.SPEED += 100
+	game_manager.losePoints(speed_boost_price)
+	if game_manager.money < speed_boost_price:
+		speed_button.disabled = true
