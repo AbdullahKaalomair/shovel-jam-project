@@ -98,7 +98,6 @@ func animation_handle():
 	else:
 		new_anim = "walk"
 	if animated_sprite.animation != new_anim:
-		print("idle")
 		animated_sprite.play(new_anim)
 		
 func inTowerSwitch():

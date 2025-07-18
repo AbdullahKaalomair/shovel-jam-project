@@ -66,6 +66,9 @@ position = Vector2(0, -3.5)
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(0, -3.5)
 
+[node name="NavigationAgent2D" parent="." index="3"]
+navigation_layers = 2
+
 [node name="WallDetectionRight" parent="." index="4"]
 visible = false
 
@@ -75,3 +78,6 @@ visible = false
 [node name="CielingDetector" type="RayCast2D" parent="." index="7"]
 position = Vector2(0, -7)
 target_position = Vector2(0, -17)
+
+[node name="FloorDetector" type="RayCast2D" parent="." index="9"]
+target_position = Vector2(0, 17)

@@ -6,7 +6,8 @@ var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
-var enemy_chosen = 1
+var enemy_chosen = 2
+
 var tower_location = randi_range(1,4)
 var gumball_location = randi_range(1,8)
 var gumball_spawned = []
@@ -78,8 +79,7 @@ func _process(delta: float) -> void:
 		enemy_spawn_timer.stop()
 		
 func nextWave():
-	
-	if round < 3:
+	if round < 5:
 		show_wave_message()
 		enemy_spawn_timer.stop()
 		round_start_timer.start()
@@ -98,6 +98,9 @@ func nextWave():
 			4:
 				gumball_machine.position = tower_spawn_4.position
 		player.red_arrow.visible = true
+		enemy_spawn_timer.wait_time -= 0.4
+		enemy_spawned = 0
+		enemy_killed = 0
 	else:
 		result_container.visible = true
 	
@@ -125,7 +128,7 @@ func show_wave_message():
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
-		enemy_chosen = randi_range(1,2)
+		enemy_chosen = 2
 		enemy_spawn_point = randi_range(1, 4)
 		#To ensure the enemy doesnt spawn where the tower is
 		while enemy_spawn_point == tower_location:

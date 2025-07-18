@@ -13,7 +13,7 @@ var just_wall_jumped = false
 var was_wall_normal = Vector2.ZERO
 
 var is_invulnerable := false
-var ammo = 10
+var ammo = 50
 var can_shoot = true
 var gumballs = 0
 

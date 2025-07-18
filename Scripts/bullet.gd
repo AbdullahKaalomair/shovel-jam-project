@@ -17,6 +17,6 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	self.hide()
+	queue_free()
 	if body is Enemy:
 		body.take_damage()
