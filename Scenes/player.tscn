@@ -179,21 +179,20 @@ shape = SubResource("RectangleShape2D_ukyrk")
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 
 [node name="TowerInteractContainer" type="PanelContainer" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -61.0
-offset_top = -31.0
-offset_right = 68.0
-offset_bottom = -19.0
+offset_left = -27.0
+offset_top = -34.0
+offset_right = 31.0
+offset_bottom = -20.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="TowerInteractContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "Press E to open shop"
+text = "E to open"
 horizontal_alignment = 1
 vertical_alignment = 1
 

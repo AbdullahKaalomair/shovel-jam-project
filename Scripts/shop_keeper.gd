@@ -17,9 +17,11 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
+		body.enter_shop()
 		playerIn = true
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Player:
+		body.exit_shop()
 		playerIn = false

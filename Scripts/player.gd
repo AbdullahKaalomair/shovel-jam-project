@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 130.0
+var SPEED = 130.0
 const JUMP_VELOCITY = -350.0
 @export var knockback_force := 400.0
 var knockback_velocity := Vector2.ZERO

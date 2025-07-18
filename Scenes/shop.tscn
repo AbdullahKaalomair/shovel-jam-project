@@ -57,6 +57,17 @@ theme_override_font_sizes/font_size = 25
 disabled = true
 text = "10 Points"
 
+[node name="SpeedLabel" type="Label" parent="ShopContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Speed Boost"
+
+[node name="SpeedButton" type="Button" parent="ShopContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+disabled = true
+text = "200 Points"
+
 [node name="ExitButton" type="Button" parent="ShopContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -66,4 +77,5 @@ text = "Exit"
 
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/TowerHPButton" to="." method="_on_tower_hp_button_pressed"]
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/AmmoButton" to="." method="_on_ammo_button_pressed"]
+[connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/SpeedButton" to="." method="_on_speed_button_pressed"]
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]
