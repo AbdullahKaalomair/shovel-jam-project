@@ -713,21 +713,24 @@ grow_vertical = 2
 
 [node name="Sky" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1152, 0)
 
 [node name="SkySprite" type="Sprite2D" parent="Background/ParallaxBackground/Sky"]
 texture = ExtResource("8_o5yvi")
 
 [node name="Mountains" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-position = Vector2(0, 75)
-motion_scale = Vector2(0.15, 0.15)
-motion_mirroring = Vector2(1152, 0)
+position = Vector2(-18, 184)
+motion_scale = Vector2(0.02, 0.02)
+motion_mirroring = Vector2(576, 0)
 
 [node name="MountainsSprite" type="Sprite2D" parent="Background/ParallaxBackground/Mountains"]
+position = Vector2(6, -17)
+scale = Vector2(0.5, 0.716)
 texture = ExtResource("9_rku1e")
 
 [node name="Ground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 position = Vector2(0, 75)
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="GroundSprite" type="Sprite2D" parent="Background/ParallaxBackground/Ground"]
@@ -735,7 +738,7 @@ texture = ExtResource("10_rfjv2")
 
 [node name="Trees" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 position = Vector2(0, 75)
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="TreesSprite" type="Sprite2D" parent="Background/ParallaxBackground/Trees"]
