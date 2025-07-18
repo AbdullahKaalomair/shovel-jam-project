@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1jc2dbw5yxlu"]
+[gd_scene load_steps=3 format=3 uid="uid://d1jc2dbw5yxlu"]
 
 [ext_resource type="Script" uid="uid://dqkuhy773xugv" path="res://Scripts/bullet.gd" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://d144emuihepn7" path="res://Assets/Sprites/Color-red.jpg" id="1_xjght"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oduel"]
-size = Vector2(4.5, 4)
+[ext_resource type="Texture2D" uid="uid://dhihngxnt17lq" path="res://Assets/Sprites/player/CandyCorn Bullet.png" id="2_oduel"]
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 8
@@ -12,10 +9,10 @@ collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_oduel")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2)
-scale = Vector2(0.0156791, 0.00987654)
-texture = ExtResource("1_xjght")
+[node name="CandyCornBullet" type="Sprite2D" parent="."]
+position = Vector2(4, 0)
+rotation = 1.5708
+texture = ExtResource("2_oduel")
 
 [node name="lifeTime" type="Timer" parent="."]
 autostart = true
@@ -23,9 +20,9 @@ autostart = true
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_oduel")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(4, 4)
+polygon = PackedVector2Array(-5, -9, -1, -9, 5, -5, 5, -3, -1, 1, -5, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="lifeTime" to="." method="_on_life_time_timeout"]

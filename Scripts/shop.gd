@@ -36,8 +36,13 @@ func open_shop() -> void:
 func _on_tower_hp_button_pressed() -> void:
 	gumball_machine.increase_max_hp()
 	game_manager.losePoints(50)
+	
 	if game_manager.money < 50:
 		tower_hp_button.disabled = true
+	if game_manager.money < 10:
+		ammo_button.disabled = true
+	if game_manager.money < speed_boost_price:
+		speed_button.disabled = true
 
 
 func _on_exit_button_pressed() -> void:
@@ -48,12 +53,22 @@ func _on_exit_button_pressed() -> void:
 func _on_ammo_button_pressed() -> void:
 	player.ammo += 50
 	game_manager.losePoints(10)
+	
 	if game_manager.money < 10:
 		ammo_button.disabled = true
+	if game_manager.money < 50:
+		tower_hp_button.disabled = true
+	if game_manager.money < speed_boost_price:
+		speed_button.disabled = true
 
 
 func _on_speed_button_pressed() -> void:
 	player.SPEED += 100
 	game_manager.losePoints(speed_boost_price)
+	
+	if game_manager.money < 50:
+		tower_hp_button.disabled = true
 	if game_manager.money < speed_boost_price:
 		speed_button.disabled = true
+	if game_manager.money < 10:
+		ammo_button.disabled = true
