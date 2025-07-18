@@ -17,6 +17,7 @@ var is_credits_being_watched = false
 @onready var machine_light = $MenuObjects/MachineLight
 @onready var text_light = $MenuObjects/TextLight
 @onready var canvas_modulate = $MenuObjects/CanvasModulate
+@onready var bg_modulate = $MenuObjects/Background/ParallaxBackground/BackgroundModulate
 
 var menu_music = preload("res://Assets/Sounds/Menu/Christmas synths.ogg")
 var coin_se = preload("res://Assets/Sounds/Menu/Coins5.mp3")
@@ -32,6 +33,7 @@ func _ready() -> void:
 	canvas_modulate.visible = true
 	machine_light.visible = true
 	text_light.visible = true
+	bg_modulate.visible = true
 
 func _input(event: InputEvent) -> void:
 	if not is_start_animation_playing and event.is_pressed():
@@ -95,6 +97,7 @@ func start_pressed() -> void:
 	canvas_modulate.visible = false
 	machine_light.visible = false
 	text_light.visible = false
+	bg_modulate.visible = false
 	is_game_started = true
 
 func skip_animation() -> void:
