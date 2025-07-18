@@ -9,5 +9,6 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
+	game_manager.pause()
 	get_tree().change_scene_to_file(MENU)
 	Engine.time_scale = 1
