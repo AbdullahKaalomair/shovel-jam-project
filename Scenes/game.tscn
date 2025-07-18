@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=4 uid="uid://sxac10n7gvt6"]
+[gd_scene load_steps=18 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
-[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
+[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://c7qiorhf30x0t" path="res://Assets/Sprites/Background/Sky.png" id="8_o5yvi"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="9_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://d0osg3ssb5xm4" path="res://Assets/Sprites/Background/Mountains.png" id="9_rku1e"]
 [ext_resource type="Texture2D" uid="uid://c3e0ij7myxfop" path="res://Assets/Sprites/Background/Grounds.png" id="10_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://co4a6ndj7lxvh" path="res://Assets/Sprites/Background/Trees.png" id="11_1phco"]
+[ext_resource type="Texture2D" uid="uid://blbpmsyu166t8" path="res://Assets/Sprites/Background/Clouds.png" id="12_rfjv2"]
 [ext_resource type="AudioStream" uid="uid://blqet6fo7wk45" path="res://Assets/Sounds/Music/happy.mp3" id="12_rku1e"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3dryh"]
@@ -715,31 +716,32 @@ motion_scale = Vector2(0, 0)
 texture = ExtResource("8_o5yvi")
 
 [node name="Mountains" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-position = Vector2(0, 150)
+position = Vector2(0, 75)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="MountainsSprite" type="Sprite2D" parent="Background/ParallaxBackground/Mountains"]
 texture = ExtResource("9_rku1e")
 
 [node name="Ground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-position = Vector2(0, 150)
+position = Vector2(0, 75)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="GroundSprite" type="Sprite2D" parent="Background/ParallaxBackground/Ground"]
 texture = ExtResource("10_rfjv2")
 
 [node name="Trees" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-position = Vector2(0, 150)
+position = Vector2(0, 75)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="TreesSprite" type="Sprite2D" parent="Background/ParallaxBackground/Trees"]
 texture = ExtResource("11_1phco")
 
 [node name="Clouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-position = Vector2(0, 150)
+position = Vector2(0, 75)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="CloudsSprite" type="Sprite2D" parent="Background/ParallaxBackground/Clouds"]
+texture = ExtResource("12_rfjv2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_rku1e")
