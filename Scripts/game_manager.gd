@@ -23,6 +23,8 @@ var gumball_spawned = []
 @onready var gumball_spawn_timer: Timer = $"../Timers/GumballSpawnTimer"
 @onready var result_container: PanelContainer = $"../CanvasLayer/ResultContainer"
 @onready var wave_container: PanelContainer = $"../CanvasLayer/WaveContainer"
+@onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
+
 
 @onready var pause_menu: Control = $"../CanvasLayer/PauseMenu"
 var paused = false
@@ -55,7 +57,7 @@ func _on_enemy_give_point(point: Variant) -> void:
 	money += point
 	
 func _ready():
-	gumball_spawn_timer.wait_time = randi_range(5, 20)
+	gumball_spawn_timer.wait_time = 1
 	gumball_spawn_timer.start()
 	
 	match tower_location:
@@ -177,7 +179,9 @@ func _on_enemy_death():
 		nextWave()
 
 func _on_gumball_player_pickup(gumball_spawn_num):
+	print(gumball_spawn_num)
 	gumball_spawned.erase(gumball_spawn_num)
+	print(gumball_spawned)
 
 func _on_round_start_timer_timeout() -> void:
 	player.red_arrow.visible = false
@@ -216,7 +220,13 @@ func _on_gumball_spawn_timer_timeout() -> void:
 			8:
 				gumball.position = gumball_spawn_8.position
 		add_child(gumball)
+		print(gumball_spawned)
 		gumball.givePoint.connect(_on_enemy_give_point)
+		gumball.playerPickUp.connect(_on_gumball_player_pickup)
 		gumball_spawned.append(gumball_location)
-		gumball_spawn_timer.wait_time = randi_range(5, 20)
-		gumball_spawn_timer.start()
+	gumball_spawn_timer.wait_time = randi(5, 20)
+	gumball_spawn_timer.start()
+
+
+func _on_audio_stream_player_finished() -> void:
+	audio_stream_player.play()

@@ -64,6 +64,7 @@ func heal_tower_gumballs(gumballs: int):
 					health = min(max_health, health + int(max_health/4))
 					used_gumballs += 1
 	hp_bar.value = health
+	hp_bar.max_value = max_health
 	sprite_handle()
 	return used_gumballs
 
