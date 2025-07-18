@@ -18,6 +18,8 @@ var is_credits_being_watched = false
 @onready var text_light = $MenuObjects/TextLight
 @onready var canvas_modulate = $MenuObjects/CanvasModulate
 @onready var bg_modulate = $MenuObjects/Background/ParallaxBackground/BackgroundModulate
+@onready var tutorial_container: PanelContainer = $TutorialContainer
+
 
 var menu_music = preload("res://Assets/Sounds/Menu/Christmas synths.ogg")
 var coin_se = preload("res://Assets/Sounds/Menu/Coins5.mp3")
@@ -51,7 +53,8 @@ func _on_play_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	get_tree().change_scene_to_file(tutorial_scene)
+	#get_tree().change_scene_to_file(tutorial_scene)
+	tutorial_container.show()
 
 
 func _on_options_pressed() -> void:
@@ -104,3 +107,7 @@ func skip_animation() -> void:
 	var anim_name = anim_player.current_animation
 	var length = anim_player.get_animation(anim_name).length
 	anim_player.seek(length, true)
+
+
+func _on_exit_tutorial_button_pressed() -> void:
+	tutorial_container.hide()
