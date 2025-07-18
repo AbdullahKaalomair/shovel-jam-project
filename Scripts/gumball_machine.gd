@@ -58,9 +58,9 @@ func take_damage(damage: int):
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
-	emit_signal("givePoint", 10)
 	for gumball in gumballs:
 				if health != max_health:
+					emit_signal("givePoint", 25)
 					health = min(max_health, health + int(max_health/4))
 					used_gumballs += 1
 	hp_bar.value = health

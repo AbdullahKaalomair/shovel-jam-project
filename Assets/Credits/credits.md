@@ -24,6 +24,10 @@
 ##### "Stage X"
 #### By Rosalila Studio
 
+##### "Happy Arcade Tune"
+#### By rezoner
+#### www.OpenGameArt.org
+
 ## - Sound Effects -
 
 #### Eric Matyas | www.soundimage.org
