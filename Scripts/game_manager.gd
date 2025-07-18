@@ -94,6 +94,7 @@ func nextWave():
 				gumball_machine.position = tower_spawn_3.position
 			4:
 				gumball_machine.position = tower_spawn_4.position
+		player.red_arrow.visible = true
 	else:
 		result_container.visible = true
 	
@@ -141,6 +142,9 @@ func _on_gumball_player_pickup(gumball_spawn_num):
 	gumball_spawned.erase(gumball_spawn_num)
 
 func _on_round_start_timer_timeout() -> void:
+	player.red_arrow.visible = false
+	if round == 1:
+		return
 	enemy_spawn_timer.start()
 
 

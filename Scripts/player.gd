@@ -21,12 +21,14 @@ var gumballs = 0
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var wall_jump_timer: Timer = $WallJumpTimer
+@onready var red_arrow: Sprite2D = $TurnAxises/TurnAxisTower/TowerPointer/RedArrow
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var gumball: Sprite2D = $Gumballs/Gumball
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
 @onready var gumball_3: Sprite2D = $Gumballs/Gumball3
+@onready var gumball_machine: Tower = %GumballMachine
 
 #List of sounds
 const NO_BULLET = preload("res://Assets/Sounds/Player/No_Bullet.wav")
@@ -35,7 +37,9 @@ const SHOOT_11 = preload("res://Assets/Sounds/Player/Shoot11.wav")
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 func _process(delta: float) -> void:
-	get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+	get_node("TurnAxises/TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+	if gumball_machine:
+		get_node("TurnAxises/TurnAxisTower").rotation = get_angle_to(gumball_machine.position)
 	Shoot()
 
 func _physics_process(delta: float) -> void:
@@ -98,14 +102,14 @@ func _physics_process(delta: float) -> void:
 
 func Shoot():
 	if Input.is_action_just_pressed("shoot") and can_shoot:
-		get_node("TurnAxis").rotation = get_angle_to(get_global_mouse_position())
+		get_node("TurnAxises/TurnAxis").rotation = get_angle_to(get_global_mouse_position())
 
 		if ammo > 0:
 			# Shooting logic
 			ammo -= 1
 
 			var bullet_instance = BULLET.instantiate()
-			bullet_instance.position = get_node("TurnAxis/ShootPoint").get_global_position()
+			bullet_instance.position = get_node("TurnAxises/TurnAxis/ShootPoint").get_global_position()
 			bullet_instance.rotation = get_angle_to(get_global_mouse_position())
 			get_parent().add_child(bullet_instance)
 

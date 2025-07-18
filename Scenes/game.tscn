@@ -461,6 +461,7 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="GumballMachine" parent="." node_paths=PackedStringArray("score", "player") instance=ExtResource("3_wrm1d")]
+unique_name_in_owner = true
 position = Vector2(1013, -170)
 score = NodePath("../GameManager")
 player = NodePath("../Player")
@@ -568,6 +569,7 @@ autostart = true
 [node name="RoundStartTimer" type="Timer" parent="Timers"]
 wait_time = 4.0
 one_shot = true
+autostart = true
 
 [node name="GumballSpawnTimer" type="Timer" parent="Timers"]
 one_shot = true

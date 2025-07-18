@@ -223,16 +223,15 @@ wait_time = 0.15
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-[node name="TurnAxises" type="Node2D" parent="."]
+[node name="TurnAxises" type="Node" parent="."]
 
 [node name="TurnAxisTower" type="Marker2D" parent="TurnAxises"]
 position = Vector2(0, -6)
 
 [node name="TowerPointer" type="Marker2D" parent="TurnAxises/TurnAxisTower"]
-position = Vector2(40, 0)
+position = Vector2(0, -37)
 
 [node name="RedArrow" type="Sprite2D" parent="TurnAxises/TurnAxisTower/TowerPointer"]
-rotation = 1.5708
 texture = ExtResource("4_fkybt")
 
 [node name="TurnAxis" type="Marker2D" parent="TurnAxises"]
