@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://sxac10n7gvt6"]
+[gd_scene load_steps=12 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="9_h4fw4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3dryh"]
@@ -465,7 +466,7 @@ navigation_polygon = SubResource("NavigationPolygon_i6g32")
 navigation_layers = 2
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(-29, -4)
+position = Vector2(807, -268)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
@@ -482,6 +483,7 @@ tile_map_data = PackedByteArray("AAAZABYAAQAKAAAAAAAaABYAAQAKAAAAAAAbABYAAQAKAAA
 tile_set = SubResource("TileSet_i6g32")
 
 [node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("5_i6g32")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -587,6 +589,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Prepare the MACHINE for the next wave...
 "
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_1l0tm")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -141.0
+offset_right = -138.0
+offset_bottom = -141.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="enemySpawnPoints" type="Node" parent="."]
 

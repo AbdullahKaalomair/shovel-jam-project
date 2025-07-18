@@ -22,6 +22,7 @@ var gumballs = 0
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 @onready var wall_jump_timer: Timer = $WallJumpTimer
 @onready var red_arrow: Sprite2D = $TurnAxises/TurnAxisTower/TowerPointer/RedArrow
+@onready var reticle: Sprite2D = $TurnAxises/TurnAxis/ShootPoint/reticle
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D

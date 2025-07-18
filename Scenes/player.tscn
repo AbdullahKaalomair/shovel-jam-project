@@ -241,7 +241,7 @@ position = Vector2(0, -6)
 [node name="ShootPoint" type="Marker2D" parent="TurnAxises/TurnAxis"]
 position = Vector2(17, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="TurnAxises/TurnAxis/ShootPoint"]
+[node name="reticle" type="Sprite2D" parent="TurnAxises/TurnAxis/ShootPoint"]
 texture = ExtResource("3_6t5aa")
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

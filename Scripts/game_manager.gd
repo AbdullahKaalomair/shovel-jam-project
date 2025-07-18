@@ -24,6 +24,8 @@ var gumball_spawned = []
 @onready var result_container: PanelContainer = $"../CanvasLayer/ResultContainer"
 @onready var wave_container: PanelContainer = $"../CanvasLayer/WaveContainer"
 
+@onready var pause_menu: Control = $"../CanvasLayer/PauseMenu"
+var paused = false
 
 @onready var spawn_1: Node2D = $"../enemySpawnPoints/Spawn 1"
 @onready var spawn_2: Node2D = $"../enemySpawnPoints/Spawn 2"
@@ -78,6 +80,9 @@ func _process(delta: float) -> void:
 		result_label.text = "You lose"
 		enemy_spawn_timer.stop()
 		
+	if Input.is_action_just_pressed("pause"):
+		pause()
+
 func nextWave():
 	if round < 5:
 		show_wave_message()
@@ -125,6 +130,15 @@ func show_wave_message():
 	# Optionally hide after
 	tween.tween_callback(wave_container.hide)
 
+func pause():
+	if paused:
+		pause_menu.hide()
+		get_tree().paused = false
+	else:
+		get_tree().paused = true
+		pause_menu.show()
+		
+	paused = !paused
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
