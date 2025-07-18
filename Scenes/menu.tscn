@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jhoq3dsbytf7" path="res://Scripts/menu.gd" id="1_1rerr"]
 [ext_resource type="Texture2D" uid="uid://d0osg3ssb5xm4" path="res://Assets/Sprites/Background/Mountains.png" id="2_7qvly"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="2_wwsa2"]
-[ext_resource type="Theme" uid="uid://btgkekqj6tral" path="res://Themes/fontTheme.tres" id="2_xhh6f"]
+[ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="2_xhh6f"]
 [ext_resource type="Texture2D" uid="uid://ii002wa8602f" path="res://Assets/Sprites/single gumball machine.png" id="3_5ti5v"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://Scenes/Credits/scrolling_credits.tscn" id="3_158mb"]
 [ext_resource type="AudioStream" uid="uid://bt22rkepshywe" path="res://Assets/Sounds/Menu/Vast-Places_Looping.mp3" id="3_cayip"]

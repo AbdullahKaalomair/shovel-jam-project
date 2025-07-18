@@ -68,6 +68,7 @@ position = Vector2(0, -3.5)
 
 [node name="NavigationAgent2D" parent="." index="3"]
 navigation_layers = 2
+debug_enabled = false
 
 [node name="WallDetectionRight" parent="." index="4"]
 visible = false

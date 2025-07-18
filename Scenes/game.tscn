@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
-[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://c7qiorhf30x0t" path="res://Assets/Sprites/Background/Sky.png" id="8_o5yvi"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="9_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://d0osg3ssb5xm4" path="res://Assets/Sprites/Background/Mountains.png" id="9_rku1e"]
@@ -629,10 +629,12 @@ position = Vector2(406, 334)
 
 [node name="EnemySpawnTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
+autostart = true
 
 [node name="RoundStartTimer" type="Timer" parent="Timers"]
 wait_time = 6.0
 one_shot = true
+autostart = true
 
 [node name="GumballSpawnTimer" type="Timer" parent="Timers"]
 one_shot = true
@@ -710,13 +712,14 @@ grow_vertical = 2
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 
 [node name="Sky" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-motion_scale = Vector2(0, 0)
+motion_scale = Vector2(0.1, 0.1)
 
 [node name="SkySprite" type="Sprite2D" parent="Background/ParallaxBackground/Sky"]
 texture = ExtResource("8_o5yvi")
 
 [node name="Mountains" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 position = Vector2(0, 75)
+motion_scale = Vector2(0.15, 0.15)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="MountainsSprite" type="Sprite2D" parent="Background/ParallaxBackground/Mountains"]
@@ -724,6 +727,7 @@ texture = ExtResource("9_rku1e")
 
 [node name="Ground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 position = Vector2(0, 75)
+motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="GroundSprite" type="Sprite2D" parent="Background/ParallaxBackground/Ground"]
@@ -731,6 +735,7 @@ texture = ExtResource("10_rfjv2")
 
 [node name="Trees" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 position = Vector2(0, 75)
+motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="TreesSprite" type="Sprite2D" parent="Background/ParallaxBackground/Trees"]
@@ -741,6 +746,7 @@ position = Vector2(0, 75)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="CloudsSprite" type="Sprite2D" parent="Background/ParallaxBackground/Clouds"]
+position = Vector2(2, -188)
 texture = ExtResource("12_rfjv2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
