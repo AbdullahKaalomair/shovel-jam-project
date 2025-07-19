@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://sxac10n7gvt6"]
+[gd_scene load_steps=21 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://cuisa7ndgxb5d" path="res://Scenes/Enemies/gumball_machine_evil.tscn" id="3_1phco"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://cejltgm8ujq20" path="res://Assets/Tileset/terrain.png" id="5_wowpa"]
-[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
-[ext_resource type="Theme" uid="uid://btgkekqj6tral" path="res://Themes/fontTheme.tres" id="7_nb51f"]
+[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
+[ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="6_nnt18"]
+[ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="7_nb51f"]
 [ext_resource type="Texture2D" uid="uid://c7qiorhf30x0t" path="res://Assets/Sprites/Background/Sky.png" id="8_o5yvi"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="9_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://d0osg3ssb5xm4" path="res://Assets/Sprites/Background/Mountains.png" id="9_rku1e"]
@@ -507,6 +508,7 @@ offset_left = 17.0
 offset_top = 22.0
 offset_right = 57.0
 offset_bottom = 62.0
+theme = ExtResource("6_nnt18")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResourceContainer"]
 layout_mode = 2
@@ -548,10 +550,15 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 239.0
+offset_top = 127.0
+offset_right = -270.0
+offset_bottom = -179.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("6_nnt18")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ResultContainer"]
 layout_mode = 2
@@ -574,6 +581,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+theme = ExtResource("6_nnt18")
 
 [node name="WaveContainer" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -588,6 +596,7 @@ offset_right = 161.0
 offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_nnt18")
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/WaveContainer"]
 layout_mode = 2
@@ -620,6 +629,7 @@ offset_right = -138.0
 offset_bottom = -141.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("6_nnt18")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimerContainer" type="PanelContainer" parent="CanvasLayer"]
@@ -631,6 +641,7 @@ offset_left = -31.0
 offset_right = 32.0
 offset_bottom = 40.0
 grow_horizontal = 2
+theme = ExtResource("6_nnt18")
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/TimerContainer"]
 layout_mode = 2

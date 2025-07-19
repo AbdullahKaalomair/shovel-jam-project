@@ -21,6 +21,7 @@ func take_damage(damage: int):
 	if health <= 0:
 		emit_signal("death")
 	if damage_to_teleport >= teleport_threshold:
+		damage_to_teleport = 0
 		await sink_and_shake()
 		emit_signal("teleport")
 
