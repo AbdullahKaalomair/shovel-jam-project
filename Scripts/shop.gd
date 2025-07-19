@@ -56,7 +56,8 @@ func _on_turret_button_pressed() -> void:
 	update_buttons()
 
 func update_buttons():
-	tower_hp_button.disabled = game_manager.money < 50
-	speed_button.disabled = game_manager.money < speed_boost_price or has_speed_boost
-	ammo_button.disabled = game_manager.money < 10
-	turret_button.disabled = game_manager.money < turret_upgrade_price or gumball_machine.can_shoot
+	if game_manager:
+		tower_hp_button.disabled = game_manager.money < 50
+		speed_button.disabled = game_manager.money < speed_boost_price or has_speed_boost
+		ammo_button.disabled = game_manager.money < 10
+		turret_button.disabled = game_manager.money < turret_upgrade_price or gumball_machine.can_shoot

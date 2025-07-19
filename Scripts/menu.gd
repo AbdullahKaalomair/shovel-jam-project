@@ -1,7 +1,7 @@
 extends Control
 
 var game_scene = "res://Scenes/game.tscn"
-var tutorial_scene = ""
+var tutorial_scene = "res://Scenes/tutorial.tscn"
 var options_scene = ""
 
 var is_start_animation_playing = false
@@ -53,8 +53,8 @@ func _on_play_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	#get_tree().change_scene_to_file(tutorial_scene)
-	tutorial_container.show()
+	get_tree().change_scene_to_file(tutorial_scene)
+	#tutorial_container.show()
 
 
 func _on_options_pressed() -> void:
