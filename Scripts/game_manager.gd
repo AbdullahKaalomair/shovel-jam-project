@@ -2,8 +2,8 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 2
-var enemy_number = 1
+const FINAL_ROUND = 7
+var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -191,6 +191,8 @@ func pause():
 func win():
 	result_container.visible = true
 	end_the_world_timer.stop()
+	get_tree().paused = true
+	gumball_machine_evil.queue_free()
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
