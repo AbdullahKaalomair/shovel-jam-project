@@ -10,6 +10,7 @@ const DAMAGE_INTERVAL := 1.0  # damage every 1 second
 var playerIn = false
 @export var player: Node2D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var hp_bar: ProgressBar = $UIControl/HealthBar
 @onready var sprite: Sprite2D = $Sprite
@@ -46,6 +47,15 @@ func sprite_handle():
 		desired_sprite = min(5, desired_sprite + 1)
 		bar += bar_per_sprite
 	sprite.frame = desired_sprite
+
+
+func sink_and_shake() -> void:
+
+	animation_player.play("sink_and_shake")
+	await animation_player.animation_finished
+	animation_player.play("RESET")
+	return
+
 
 func take_damage(damage: int):
 	health -= damage

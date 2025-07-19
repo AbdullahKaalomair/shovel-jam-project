@@ -2,14 +2,15 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 6
-var enemy_number = 5
+const FINAL_ROUND = 2
+var enemy_number = 1
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
 var enemy_chosen = 2
 
 var tower_location = randi_range(1,4)
+var tower_location_prev = 0
 var gumball_location = randi_range(1,8)
 var gumball_spawned = []
 var maximum_gumball_number = 5
@@ -108,9 +109,10 @@ func nextWave():
 	if round < FINAL_ROUND:
 		show_wave_message()
 		enemy_spawn_timer.stop()
+		await gumball_machine.sink_and_shake()
+		teleport_tower()
 		round_start_timer.start()
 		enemy_number += 5
-		teleport_tower()
 		enemy_spawn_timer.wait_time -= 0.4
 		enemy_spawned = 0
 		enemy_killed = 0
@@ -129,7 +131,10 @@ func nextWave():
 		
 		
 func teleport_tower():
-	tower_location = randi_range(1, 4)
+	tower_location_prev = tower_location
+	while tower_location_prev == tower_location:
+		tower_location = randi_range(1, 4)
+		
 	match tower_location:
 		0:
 			gumball_machine.position = tower_spawn_0.position
