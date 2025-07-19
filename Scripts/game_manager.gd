@@ -2,8 +2,8 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 2
-var enemy_number = 1
+const FINAL_ROUND = 6
+var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -121,6 +121,7 @@ func nextWave():
 		print("LAST WAVE")
 		wave_label.text = "THE END OF THE WORLD JUST GOT STARTED BY THE MACHINE"
 		show_wave_message()
+		await gumball_machine.sink_and_shake()
 		gumball_machine.hide()
 		timer_container.show()
 		end_the_world_timer.start()

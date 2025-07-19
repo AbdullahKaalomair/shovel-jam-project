@@ -39,15 +39,17 @@ func activate_hit_shader_effect() -> void:
 	hit_timer.start()
 
 func _on_shoot_timer_timeout() -> void:
-	var shoot_point = get_node("ShootPoint").get_global_position()
-	var player_pos = player.global_position
-	var direction = player_pos - shoot_point
-	var angle = direction.angle()
+	print(can_shoot)
+	if can_shoot:
+		var shoot_point = get_node("ShootPoint").get_global_position()
+		var player_pos = player.global_position
+		var direction = player_pos - shoot_point
+		var angle = direction.angle()
 
-	var bullet_instance = EVIL_BULLET.instantiate()
-	bullet_instance.position = shoot_point
-	bullet_instance.rotation = angle
-	get_parent().add_child(bullet_instance)
+		var bullet_instance = EVIL_BULLET.instantiate()
+		bullet_instance.position = shoot_point
+		bullet_instance.rotation = angle
+		get_parent().add_child(bullet_instance)
 
 
 func _on_hit_timer_timeout() -> void:

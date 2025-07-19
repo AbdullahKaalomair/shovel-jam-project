@@ -46,6 +46,17 @@ theme_override_font_sizes/font_size = 25
 disabled = true
 text = "50 Points"
 
+[node name="TurretLabel" type="Label" parent="ShopContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Tower Turret"
+
+[node name="TurretButton" type="Button" parent="ShopContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+disabled = true
+text = "300 Points"
+
 [node name="AmmoLabel" type="Label" parent="ShopContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
@@ -76,6 +87,7 @@ size_flags_stretch_ratio = 3.0
 text = "Exit"
 
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/TowerHPButton" to="." method="_on_tower_hp_button_pressed"]
+[connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/TurretButton" to="." method="_on_turret_button_pressed"]
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/AmmoButton" to="." method="_on_ammo_button_pressed"]
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/SpeedButton" to="." method="_on_speed_button_pressed"]
 [connection signal="pressed" from="ShopContainer/MarginContainer/GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]

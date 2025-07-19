@@ -718,7 +718,6 @@ position = Vector2(882, 97)
 position = Vector2(-199, 127)
 
 [node name="Background" type="Control" parent="."]
-visible = false
 z_index = -1
 layout_mode = 3
 anchors_preset = 15
@@ -728,7 +727,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
-visible = false
 
 [node name="Sky" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)

@@ -15,6 +15,10 @@ var playerIn = false
 @onready var hp_bar: ProgressBar = $UIControl/HealthBar
 @onready var sprite: Sprite2D = $Sprite
 
+@onready var can_shoot = false
+
+const BULLET = preload("res://Scenes/bullet.tscn")
+
 signal givePoint(point)
 
 # Called when the node enters the scene tree for the first time.
@@ -83,6 +87,19 @@ func increase_max_hp():
 	health = max_health
 	hp_bar.value = health
 	sprite_handle()
+
+func _on_shoot_timer_timeout() -> void:
+	if can_shoot and damage_sources.size() > 0:
+		var shoot_point = get_node("ShootPoint").get_global_position()
+		var enemy_pos = damage_sources.keys()[0].position
+		var direction = enemy_pos - shoot_point
+		var angle = direction.angle()
+
+		var bullet_instance = BULLET.instantiate()
+		bullet_instance.position = shoot_point
+		bullet_instance.rotation = angle
+		get_parent().add_child(bullet_instance)
+	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Enemy:
