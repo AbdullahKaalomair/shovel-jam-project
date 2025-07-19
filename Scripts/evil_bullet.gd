@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 
-const projectile_speed = 1
+const projectile_speed = 400
 #const ENEMY = preload("res://Scenes/enemy.tscn")
 
 func _ready() -> void:
