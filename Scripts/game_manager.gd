@@ -2,8 +2,8 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 6
-var enemy_number = 5
+const FINAL_ROUND = 2
+var enemy_number = 1
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -65,6 +65,8 @@ const PEPPERMINT_CANDY_ENEMY = preload("res://Scenes/Enemies/PeppermintCandyEnem
 const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.tscn")
 const GUMBALL = preload("res://Scenes/gumball.tscn")
 
+const X = preload("res://Assets/Sounds/X.ogg")
+
 func _on_enemy_give_point(point: Variant) -> void:
 	money += point
 	
@@ -113,18 +115,21 @@ func nextWave():
 		teleport_tower()
 		round_start_timer.start()
 		enemy_number += 5
-		enemy_spawn_timer.wait_time -= 0.4
+		enemy_spawn_timer.wait_time -= 0.3
 		enemy_spawned = 0
 		enemy_killed = 0
 	else:
 		#result_container.visible = true
-		print("LAST WAVE")
 		wave_label.text = "THE END OF THE WORLD JUST GOT STARTED BY THE MACHINE"
 		show_wave_message()
+		enemy_spawn_timer.stop()
+		audio_stream_player.stream = X
+		audio_stream_player.play()
 		await gumball_machine.sink_and_shake()
 		gumball_machine.hide()
 		timer_container.show()
 		end_the_world_timer.start()
+		gumball_machine_evil.update_hp(gumball_machine.health, gumball_machine.max_health)
 		teleport_tower()
 		maximum_gumball_number = 3
 		for gumball_spawn_num in gumball_spawned:
@@ -185,6 +190,7 @@ func pause():
 	
 func win():
 	result_container.visible = true
+	end_the_world_timer.stop()
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:

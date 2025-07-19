@@ -12,6 +12,7 @@ extends Control
 @onready var turret_button: Button = $ShopContainer/MarginContainer/GridContainer/TurretButton
 
 var speed_boost_price = 200
+var has_speed_boost = false
 var turret_upgrade_price = 300
 
 
@@ -41,6 +42,7 @@ func _on_ammo_button_pressed() -> void:
 
 func _on_speed_button_pressed() -> void:
 	player.SPEED += 100
+	has_speed_boost = true
 	game_manager.losePoints(speed_boost_price)
 	
 	update_buttons()
@@ -55,6 +57,6 @@ func _on_turret_button_pressed() -> void:
 
 func update_buttons():
 	tower_hp_button.disabled = game_manager.money < 50
-	speed_button.disabled = game_manager.money < speed_boost_price
+	speed_button.disabled = game_manager.money < speed_boost_price or has_speed_boost
 	ammo_button.disabled = game_manager.money < 10
 	turret_button.disabled = game_manager.money < turret_upgrade_price or gumball_machine.can_shoot

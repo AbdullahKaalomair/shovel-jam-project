@@ -470,6 +470,7 @@ position = Vector2(-8, -8)
 navigation_polygon = SubResource("NavigationPolygon_3dryh")
 
 [node name="FlyNavigationRegion2D" type="NavigationRegion2D" parent="Node"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_i6g32")
 navigation_layers = 2
 
@@ -566,6 +567,7 @@ layout_mode = 2
 text = "Restart"
 
 [node name="Shop" parent="CanvasLayer" instance=ExtResource("5_v158k")]
+process_mode = 3
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -654,7 +656,7 @@ position = Vector2(406, 334)
 [node name="Timers" type="Node" parent="."]
 
 [node name="EnemySpawnTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="RoundStartTimer" type="Timer" parent="Timers"]

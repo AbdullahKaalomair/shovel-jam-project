@@ -86,6 +86,7 @@ func increase_max_hp():
 	max_health += 5
 	health = max_health
 	hp_bar.value = health
+	hp_bar.max_value = max_health
 	sprite_handle()
 
 func _on_shoot_timer_timeout() -> void:

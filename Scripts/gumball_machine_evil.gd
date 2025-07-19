@@ -21,16 +21,16 @@ func take_damage(damage: int):
 	if health <= 0:
 		emit_signal("death")
 	if damage_to_teleport >= teleport_threshold:
-		collision_shape_2d.disabled = true
 		await sink_and_shake()
 		emit_signal("teleport")
-		collision_shape_2d.disabled = false
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
 	emit_signal("givePoint", 25)
-	take_damage(5)
-	used_gumballs += 1
+	for gumball in gumballs:
+		take_damage(2)
+		emit_signal("givePoint", 25)
+		used_gumballs += 1
 	sprite_handle()
 	return used_gumballs
 
@@ -38,8 +38,14 @@ func activate_hit_shader_effect() -> void:
 	sprite.material.set_shader_parameter("active", true)
 	hit_timer.start()
 
+func update_hp(new_hp, new_max_hp):
+	max_health = new_max_hp
+	health = new_hp
+	hp_bar.value = health
+	hp_bar.max_value = max_health
+	sprite_handle()
+
 func _on_shoot_timer_timeout() -> void:
-	print(can_shoot)
 	if can_shoot:
 		var shoot_point = get_node("ShootPoint").get_global_position()
 		var player_pos = player.global_position
