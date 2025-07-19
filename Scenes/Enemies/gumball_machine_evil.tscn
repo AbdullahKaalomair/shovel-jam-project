@@ -1,13 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuisa7ndgxb5d"]
+[gd_scene load_steps=14 format=3 uid="uid://cuisa7ndgxb5d"]
 
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="1_jvh03"]
 [ext_resource type="Script" uid="uid://boonpdso4wqiw" path="res://Scripts/gumball_machine_evil.gd" id="2_5wafn"]
 [ext_resource type="Shader" uid="uid://cusd4of3vhf26" path="res://Shaders/got_hit.gdshader" id="3_5wafn"]
+[ext_resource type="Texture2D" uid="uid://bhutiqrd7f7f4" path="res://Assets/Sprites/EvilSign.png" id="4_flyiq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flyiq"]
 shader = ExtResource("3_5wafn")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2703"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kric"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o35tb"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y8tc"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ei2n"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mft8j"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av2t6"]
+atlas = ExtResource("4_flyiq")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5me8j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2703")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kric")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o35tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y8tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ei2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mft8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av2t6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="GumballMachine_Evil" instance=ExtResource("1_jvh03")]
 collision_layer = 4
@@ -18,16 +76,21 @@ script = ExtResource("2_5wafn")
 material = SubResource("ShaderMaterial_flyiq")
 
 [node name="Label" type="Label" parent="." index="4"]
+visible = false
 offset_left = -19.0
 offset_top = -143.0
 offset_right = 21.0
 offset_bottom = -120.0
 text = "EVIL"
 
-[node name="AnimationPlayer" parent="." index="5"]
-speed_scale = 3.0
-
 [node name="HitTimer" type="Timer" parent="." index="8"]
 wait_time = 0.2
+
+[node name="EvilSprite" type="AnimatedSprite2D" parent="." index="9"]
+position = Vector2(43, -91)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5me8j")
+autoplay = "default"
+frame_progress = 0.659053
 
 [connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
