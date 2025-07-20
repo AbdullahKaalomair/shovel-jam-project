@@ -921,18 +921,6 @@ offset_bottom = 217.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="OptionsContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_top = 44
-
-[node name="Label" type="Label" parent="OptionsContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "Options"
-
 [node name="GridContainer" type="GridContainer" parent="OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -948,6 +936,7 @@ text = "Music Volume: "
 
 [node name="TextureRect" type="HSlider" parent="OptionsContainer/GridContainer"]
 layout_mode = 2
+size_flags_stretch_ratio = 3.0
 theme_override_styles/slider = SubResource("StyleBoxLine_5ti5v")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_1by5w")
 min_value = -80.0
@@ -960,12 +949,13 @@ text = "Sound Volume: "
 
 [node name="SFXTextureRect3" type="HSlider" parent="OptionsContainer/GridContainer"]
 layout_mode = 2
+size_flags_stretch_ratio = 3.0
 theme_override_styles/slider = SubResource("StyleBoxLine_5ti5v")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_1by5w")
 min_value = -80.0
 max_value = 0.0
 
-[node name="FullscreenTextureRect2" type="CheckBox" parent="OptionsContainer/GridContainer"]
+[node name="TextureRect2" type="CheckBox" parent="OptionsContainer/GridContainer"]
 layout_mode = 2
 text = "FullScreen     "
 
@@ -980,6 +970,17 @@ text = "Exit"
 [node name="Label3" type="Label" parent="OptionsContainer/GridContainer"]
 layout_mode = 2
 text = "                                        "
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 44
+
+[node name="Label" type="Label" parent="OptionsContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Options"
 
 [node name="BGAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_cayip")
@@ -1161,7 +1162,6 @@ layout_mode = 1
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="OptionsContainer/GridContainer/TextureRect" to="." method="_on_texture_rect_value_changed"]
 [connection signal="value_changed" from="OptionsContainer/GridContainer/SFXTextureRect3" to="." method="_on_sfx_texture_rect_3_value_changed"]
-[connection signal="toggled" from="OptionsContainer/GridContainer/FullscreenTextureRect2" to="." method="_on_texture_rect_2_toggled"]
 [connection signal="pressed" from="OptionsContainer/GridContainer/ExitTutorialButton" to="." method="_on_exit_tutorial_button_pressed"]
 [connection signal="timeout" from="MenuObjects/LightFlickerTimer" to="." method="_on_light_flicker_timer_timeout"]
 [connection signal="end_reached" from="CreditsMarginContainer/ScrollingCredits/ScrollContainer" to="." method="_on_scroll_container_end_reached"]

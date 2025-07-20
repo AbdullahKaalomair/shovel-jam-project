@@ -18,7 +18,9 @@ var is_credits_being_watched = false
 @onready var text_light = $MenuObjects/TextLight
 @onready var canvas_modulate = $MenuObjects/CanvasModulate
 @onready var bg_modulate = $MenuObjects/Background/ParallaxBackground/BackgroundModulate
-@onready var tutorial_container: PanelContainer = $TutorialContainer
+@onready var options_container: PanelContainer = $OptionsContainer
+@onready var fullscreen_texture_rect_2: CheckBox = $OptionsContainer/GridContainer/FullscreenTextureRect2
+
 
 @onready var play_btn: Button = $MenuMarginContainer/VBoxContainer/Play
 @onready var tutorial_btn: Button = $MenuMarginContainer/VBoxContainer/Tutorial
@@ -41,7 +43,8 @@ func _ready() -> void:
 	machine_light.visible = true
 	text_light.visible = true
 	bg_modulate.visible = true
-
+	fullscreen_texture_rect_2.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	
 func _input(event: InputEvent) -> void:
 	if not is_start_animation_playing and event.is_pressed():
 		is_start_animation_playing = true
@@ -63,12 +66,11 @@ func _on_tutorial_pressed() -> void:
 	tutorial_btn.disabled = true
 	await fade_layer.play_fade_in()
 	get_tree().change_scene_to_file(tutorial_scene)
-	#tutorial_container.show()
 
 
 func _on_options_pressed() -> void:
 	options_btn.disabled = true
-	get_tree().change_scene_to_file(options_scene)
+	options_container.show()
 
 
 func _on_quit_pressed() -> void:
@@ -120,4 +122,19 @@ func skip_animation() -> void:
 
 
 func _on_exit_tutorial_button_pressed() -> void:
-	tutorial_container.hide()
+	options_container.hide()
+	options_btn.disabled = false
+
+func _on_texture_rect_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), value )
+
+
+func _on_sfx_texture_rect_3_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound Effect"), value )
+
+
+func _on_texture_rect_2_toggled(toggled_on: bool) -> void:
+	if toggled_on == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

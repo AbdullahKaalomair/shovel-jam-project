@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://bug4iymg6ypks"]
+[gd_resource type="AudioBusLayout" format=3 uid="uid://dw71o0xbd1vw0"]
 
 [resource]
 bus/1/name = &"Sound Effect"
@@ -11,5 +11,5 @@ bus/2/name = &"Background"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -10.5185
+bus/2/volume_db = -9.63278
 bus/2/send = &"Master"
