@@ -7,6 +7,11 @@ class_name Enemy
 @onready var wall_detection_right: RayCast2D = $WallDetectionRight
 @onready var wall_detection_left: RayCast2D = $WallDetectionLeft
 @onready var hit_timer: Timer = $HitTimer
+@onready var death_audio_stream_player_2d: AudioStreamPlayer2D = $DeathAudioStreamPlayer2D
+@onready var area_2d: Area2D = $Area2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
+
 
 
 var health = 3
@@ -88,6 +93,11 @@ func take_damage(damage: int):
 	if health <= 0:
 		emit_signal("givePoint", 5)
 		emit_signal("death")
+		self.hide()
+		area_2d.monitoring = false
+		collision_shape_2d.disabled = true
+		death_audio_stream_player_2d.play()
+		await death_audio_stream_player_2d.finished
 		queue_free()
 
 func animation_handle():
