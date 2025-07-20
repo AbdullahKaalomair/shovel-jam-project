@@ -3,7 +3,7 @@ extends Node
 var money = 20
 var total_points = 0
 var round = 1
-var FINAL_ROUND = 2
+var FINAL_ROUND = 7
 var endless 
 var enemy_number = 5
 var enemy_spawned = 0
