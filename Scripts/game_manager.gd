@@ -1,9 +1,10 @@
 extends Node
 
 var money = 20
+var total_points = 0
 var round = 1
-const FINAL_ROUND = 7
-var enemy_number = 5
+const FINAL_ROUND = 2
+var enemy_number = 1 
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -71,9 +72,11 @@ const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.ts
 const GUMBALL = preload("res://Scenes/gumball.tscn")
 
 const X = preload("res://Assets/Sounds/X.ogg")
+const MENU = "res://Scenes/menu.tscn"
 
 func _on_enemy_give_point(point: Variant) -> void:
 	money += point
+	total_points += point
 	
 func _ready():
 	gumball_spawn_timer.wait_time = randi_range(5, 20)
@@ -100,7 +103,7 @@ func _process(delta: float) -> void:
 	
 	if not gumball_machine:
 		result_container.visible = true
-		result_label.text = "You lose"
+		result_label.text = "You lose \nTotal points: " +  str(total_points)
 		enemy_spawn_timer.stop()
 		get_tree().paused = true
 	
@@ -197,6 +200,7 @@ func pause():
 	
 func win():
 	result_container.visible = true
+	result_label.text = "YOU SAVED THE WORLD \nTotal points: " +  str(total_points)
 	end_the_world_timer.stop()
 	get_tree().paused = true
 	gumball_machine_evil.queue_free()
@@ -296,4 +300,9 @@ func _on_audio_stream_player_finished() -> void:
 func _on_end_the_world_timer_timeout() -> void:
 	get_tree().paused = true
 	result_container.visible = true
-	result_label.text = "You lose"
+	result_label.text = "You lose \nTotal points: " +  str(total_points)
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(MENU)

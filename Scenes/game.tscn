@@ -6,7 +6,7 @@
 [ext_resource type="TileSet" uid="uid://cnk82yemfqaxs" path="res://Assets/Tileset/game.tres" id="4_nnt18"]
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
-[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://dtqxtwn644lo0" path="res://Scenes/fade_layer.tscn" id="6_ewbju"]
 [ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="6_nnt18"]
 [ext_resource type="Theme" uid="uid://btgkekqj6tral" path="res://Themes/fontTheme.tres" id="7_nb51f"]
@@ -138,11 +138,17 @@ size_flags_vertical = 4
 
 [node name="ResultLabel" type="Label" parent="CanvasLayer/ResultContainer/VBoxContainer"]
 layout_mode = 2
-text = "You win!"
+theme_override_font_sizes/font_size = 30
+text = "YOU SAVED THE WORLD!
+ Total points: "
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/ResultContainer/VBoxContainer"]
 layout_mode = 2
 text = "Restart"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/ResultContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
 
 [node name="Shop" parent="CanvasLayer" instance=ExtResource("5_v158k")]
 process_mode = 3
@@ -363,6 +369,7 @@ bus = &"Background"
 [connection signal="death" from="GumballMachine_Evil" to="GameManager" method="win"]
 [connection signal="teleport" from="GumballMachine_Evil" to="GameManager" method="teleport_tower"]
 [connection signal="pressed" from="CanvasLayer/ResultContainer/VBoxContainer/RestartButton" to="GameManager" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultContainer/VBoxContainer/QuitButton" to="GameManager" method="_on_quit_button_pressed"]
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="GameManager" method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/RoundStartTimer" to="GameManager" method="_on_round_start_timer_timeout"]
 [connection signal="timeout" from="Timers/GumballSpawnTimer" to="GameManager" method="_on_gumball_spawn_timer_timeout"]
