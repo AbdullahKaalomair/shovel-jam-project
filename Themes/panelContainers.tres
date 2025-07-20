@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://cdx7abfdhao4j"]
 
+[ext_resource type="FontFile" uid="uid://cjf3x6rdl3mob" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="1_5uq2f"]
 [ext_resource type="Texture2D" uid="uid://bgpns0r4s7qwh" path="res://Assets/UI/CandyCaneBox3.png" id="1_rh5yi"]
-[ext_resource type="FontFile" uid="uid://bl1anw7ut5kqi" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_xl6ls"]
 [ext_resource type="Texture2D" uid="uid://b5vfg3pdghh6c" path="res://Assets/UI/custardButton.png" id="2_5uq2f"]
 [ext_resource type="Texture2D" uid="uid://dgrav013vbpsu" path="res://Assets/UI/custardButtonChosen.png" id="3_sbxb5"]
 [ext_resource type="Texture2D" uid="uid://is7c5ra6y01l" path="res://Assets/UI/custardButtonClicked.png" id="4_hlx8q"]
@@ -54,10 +54,10 @@ Button/colors/font_color = Color(1, 0, 0.0166664, 1)
 Button/colors/font_focus_color = Color(0.95, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.95, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/fonts/font = ExtResource("1_xl6ls")
+Button/fonts/font = ExtResource("1_5uq2f")
 Button/styles/disabled = SubResource("StyleBoxTexture_vflxg")
 Button/styles/hover = SubResource("StyleBoxTexture_irw0n")
 Button/styles/normal = SubResource("StyleBoxTexture_1wwgi")
 Button/styles/pressed = SubResource("StyleBoxTexture_rupkt")
-Label/fonts/font = ExtResource("1_xl6ls")
+Label/fonts/font = ExtResource("1_5uq2f")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_xl6ls")
