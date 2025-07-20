@@ -1,7 +1,6 @@
 # The credits file
-## Insert Game Title...
-
-### Insert Game logo/image if exists...
+## Gumbo and the MACHINE
+![Game Title](/Assets/Sprites/Title/title.png)
 
 
 ## - Lead Developer -
