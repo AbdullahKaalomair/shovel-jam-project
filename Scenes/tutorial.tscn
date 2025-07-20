@@ -9,15 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://dtqxtwn644lo0" path="res://Scenes/fade_layer.tscn" id="6_jb51l"]
 [ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="6_on4kn"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="7_70gml"]
-[ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="8_8va2t"]
-[ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="9_8mnmb"]
+[ext_resource type="Theme" uid="uid://btgkekqj6tral" path="res://Themes/fontTheme.tres" id="8_8va2t"]
+[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="9_8mnmb"]
 [ext_resource type="Texture2D" uid="uid://c7qiorhf30x0t" path="res://Assets/Sprites/Background/Sky.png" id="11_ap3ea"]
 [ext_resource type="Texture2D" uid="uid://d0osg3ssb5xm4" path="res://Assets/Sprites/Background/Mountains.png" id="12_t6ver"]
 [ext_resource type="Texture2D" uid="uid://c3e0ij7myxfop" path="res://Assets/Sprites/Background/Grounds.png" id="13_2nb4t"]
 [ext_resource type="Texture2D" uid="uid://co4a6ndj7lxvh" path="res://Assets/Sprites/Background/Trees.png" id="14_jb51l"]
 [ext_resource type="Texture2D" uid="uid://blbpmsyu166t8" path="res://Assets/Sprites/Background/Clouds.png" id="15_dxsep"]
 [ext_resource type="Texture2D" uid="uid://1rkfgqcbhilu" path="res://Assets/Sprites/Shop/Chef Pepperino1.png" id="16_t6ver"]
-[ext_resource type="AudioStream" uid="uid://bx6k0du7lcs6w" path="res://Assets/Sounds/Menu/Christmas synths.ogg" id="17_2nb4t"]
+[ext_resource type="AudioStream" uid="uid://6nlalii41gog" path="res://Assets/Sounds/Tutorial/Candy-Factory.mp3" id="18_jb51l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70gml"]
 size = Vector2(557, 423)
@@ -379,7 +379,7 @@ position = Vector2(1470, 137)
 texture = ExtResource("16_t6ver")
 
 [node name="BGAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_2nb4t")
+stream = ExtResource("18_jb51l")
 volume_db = -10.0
 autoplay = true
 parameters/looping = true
