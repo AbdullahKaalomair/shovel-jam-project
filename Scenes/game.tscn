@@ -357,6 +357,7 @@ texture = ExtResource("12_rfjv2")
 stream = ExtResource("12_rku1e")
 volume_db = -20.0
 autoplay = true
+bus = &"Background"
 
 [connection signal="givePoint" from="GumballMachine" to="GameManager" method="_on_enemy_give_point"]
 [connection signal="death" from="GumballMachine_Evil" to="GameManager" method="win"]
