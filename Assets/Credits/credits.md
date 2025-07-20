@@ -1,5 +1,5 @@
 # The credits file
-## Gumbo and the MACHINE
+## Gumbo* and the MACHINE
 ![Game Title](/Assets/Sprites/Title/title.png)
 
 
