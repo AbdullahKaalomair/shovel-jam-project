@@ -360,6 +360,7 @@ position = Vector2(2, -188)
 texture = ExtResource("12_rfjv2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("12_rku1e")
 volume_db = -20.0
 autoplay = true

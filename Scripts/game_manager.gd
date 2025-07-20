@@ -72,6 +72,8 @@ const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.ts
 const GUMBALL = preload("res://Scenes/gumball.tscn")
 
 const X = preload("res://Assets/Sounds/X.ogg")
+const VAST_PLACES_LOOPING = preload("res://Assets/Sounds/Menu/Vast-Places_Looping.mp3")
+const VICTORY = preload("res://Assets/Sounds/Music/Victory.ogg")
 const MENU = "res://Scenes/menu.tscn"
 
 func _on_enemy_give_point(point: Variant) -> void:
@@ -102,10 +104,7 @@ func _process(delta: float) -> void:
 	wave_number_label.text = str(round)
 	
 	if not gumball_machine:
-		result_container.visible = true
-		result_label.text = "You lose \nTotal points: " +  str(total_points)
-		enemy_spawn_timer.stop()
-		get_tree().paused = true
+		lose()
 	
 	if round == FINAL_ROUND:
 		var t = int(end_the_world_timer.time_left)
@@ -199,11 +198,36 @@ func pause():
 	paused = !paused
 	
 func win():
+	result_container.modulate.a = 0.0  # Start fully transparent
 	result_container.visible = true
-	result_label.text = "YOU SAVED THE WORLD \nTotal points: " +  str(total_points)
+
+	result_label.text = "YOU SAVED THE WORLD \nTotal points: " + str(total_points)
 	end_the_world_timer.stop()
+	audio_stream_player.stream = VICTORY
+	audio_stream_player.autoplay = false
+	audio_stream_player.play()
+	
+	# Start fade-in tween
+	var tween := get_tree().create_tween()
+	tween.tween_property(result_container, "modulate:a", 1.0, 0.5) # Fade in over 1.5 sec
+	await tween.finished
 	get_tree().paused = true
-	gumball_machine_evil.queue_free()
+
+func lose():
+	result_container.visible = true
+	result_container.modulate.a = 0.0  # Start fully transparent
+	
+	result_label.text = "You lose \nTotal points: " +  str(total_points)
+	enemy_spawn_timer.stop()
+	audio_stream_player.stream = VAST_PLACES_LOOPING
+	audio_stream_player.play()
+	
+	# Start fade-in tween
+	var tween := get_tree().create_tween()
+	tween.tween_property(result_container, "modulate:a", 1.0, 0.5) # Fade in over 1.5 sec
+	await tween.finished
+	
+	get_tree().paused = true
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
@@ -298,9 +322,7 @@ func _on_audio_stream_player_finished() -> void:
 	audio_stream_player.play()
 
 func _on_end_the_world_timer_timeout() -> void:
-	get_tree().paused = true
-	result_container.visible = true
-	result_label.text = "You lose \nTotal points: " +  str(total_points)
+	lose()
 
 
 func _on_quit_button_pressed() -> void:

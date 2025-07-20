@@ -27,6 +27,10 @@
 #### By rezoner
 #### www.OpenGameArt.org
 
+##### "Victory"
+#### By Eliot Corley from ChaosIsHarmony
+#### www.OpenGameArt.org
+
 ## - Sound Effects -
 
 #### Eric Matyas | www.soundimage.org
