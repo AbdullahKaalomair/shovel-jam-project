@@ -10,7 +10,6 @@ var damage_to_teleport = 0
 const EVIL_BULLET = preload("res://Scenes/evil_bullet.tscn")
 
 signal teleport
-signal death
 
 func take_damage(damage: int):
 	health -= damage
@@ -19,7 +18,8 @@ func take_damage(damage: int):
 	activate_hit_shader_effect()
 	sprite_handle()
 	if health <= 0:
-		emit_signal("death")
+		deathh()
+		
 	if damage_to_teleport >= teleport_threshold:
 		damage_to_teleport = 0
 		await sink_and_shake()

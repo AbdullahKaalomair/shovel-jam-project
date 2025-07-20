@@ -2,8 +2,8 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 7
-var enemy_number = 5
+const FINAL_ROUND = 2
+var enemy_number = 1
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -197,7 +197,10 @@ func win():
 func _on_enemy_spawn_timer_timeout() -> void:
 	if enemy_spawned <= enemy_number:
 		
-		enemy_chosen = randi_range(1,2)
+		if (round <= 3):
+			enemy_chosen = 1
+		else:
+			enemy_chosen = randi_range(1,2)
 		enemy_spawn_point = randi_range(1, 4)
 		#To ensure the enemy doesnt spawn where the tower is
 		while enemy_spawn_point == tower_location:

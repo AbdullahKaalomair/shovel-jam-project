@@ -15,11 +15,15 @@ var playerIn = false
 @onready var hp_bar: ProgressBar = $UIControl/HealthBar
 @onready var sprite: Sprite2D = $Sprite
 
+@onready var explosion_2d: AnimatedSprite2D = $Explosion2D
+@onready var explosion_audio_stream_player_2d: AudioStreamPlayer2D = $ExplosionAudioStreamPlayer2D
+
 @onready var can_shoot = false
 
 const BULLET = preload("res://Scenes/bullet.tscn")
 
 signal givePoint(point)
+signal death
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -68,7 +72,7 @@ func take_damage(damage: int):
 		#sprite.frame -= 1
 	sprite_handle()
 	if health <= 0:
-		queue_free()
+		deathh()
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
@@ -88,6 +92,12 @@ func increase_max_hp():
 	hp_bar.value = health
 	hp_bar.max_value = max_health
 	sprite_handle()
+
+func deathh():
+	explosion_2d.show()
+	explosion_2d.play("default")
+	explosion_audio_stream_player_2d.play()
+	
 
 func _on_shoot_timer_timeout() -> void:
 	if can_shoot and damage_sources.size() > 0:
@@ -118,3 +128,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		damage_sources.erase(body)
 		body.inTowerSwitch()
 	
+
+
+func _on_explosion_audio_stream_player_2d_finished() -> void:
+	emit_signal("death")
+	queue_free()
