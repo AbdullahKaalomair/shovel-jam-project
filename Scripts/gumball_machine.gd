@@ -18,6 +18,7 @@ var playerIn = false
 
 @onready var explosion_2d: AnimatedSprite2D = $Explosion2D
 @onready var explosion_audio_stream_player_2d: AudioStreamPlayer2D = $ExplosionAudioStreamPlayer2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @onready var can_shoot = false
 
@@ -81,6 +82,7 @@ func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
 	for gumball in gumballs:
 				if health != max_health:
+					audio_stream_player_2d.play()
 					emit_signal("givePoint", 25)
 					health = min(max_health, health + int(max_health/4))
 					used_gumballs += 1
