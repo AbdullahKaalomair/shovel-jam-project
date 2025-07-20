@@ -94,8 +94,8 @@ func take_damage(damage: int):
 		emit_signal("givePoint", 5)
 		emit_signal("death")
 		self.hide()
-		area_2d.monitoring = false
-		collision_shape_2d.disabled = true
+		area_2d.set_deferred("monitoring", false)
+		collision_shape_2d.set_deferred("disabled", true)
 		death_audio_stream_player_2d.play()
 		await death_audio_stream_player_2d.finished
 		queue_free()

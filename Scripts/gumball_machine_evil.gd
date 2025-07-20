@@ -22,12 +22,16 @@ func take_damage(damage: int):
 			dead = true
 			deathh()
 		
-
-		
 	if damage_to_teleport >= teleport_threshold and not dead:
 		damage_to_teleport = 0
 		await sink_and_shake()
 		emit_signal("teleport")
+	
+func resurrect():
+	dead = false
+	explosion_2d.hide()
+		
+	
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 

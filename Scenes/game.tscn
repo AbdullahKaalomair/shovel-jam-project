@@ -366,6 +366,7 @@ volume_db = -20.0
 autoplay = true
 bus = &"Background"
 
+[connection signal="death" from="GumballMachine" to="GameManager" method="_on_gumball_machine_death"]
 [connection signal="givePoint" from="GumballMachine" to="GameManager" method="_on_enemy_give_point"]
 [connection signal="death" from="GumballMachine_Evil" to="GameManager" method="win"]
 [connection signal="teleport" from="GumballMachine_Evil" to="GameManager" method="teleport_tower"]

@@ -23,7 +23,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		emit_signal("givePoint", 5)
 		emit_signal("playerPickUp", gumball_spawn_num)
 		body.addGumball()
-		area_2d.monitoring = false
+		area_2d.set_deferred("monitoring", false)
 		audio_stream_player_2d.play()
 		await audio_stream_player_2d.finished
 		queue_free()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://b3k1va8bpeacs"]
+[gd_scene load_steps=32 format=3 uid="uid://b3k1va8bpeacs"]
 
 [ext_resource type="Script" uid="uid://cnxt102j160ru" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://84hiamd4sgas" path="res://Assets/Sprites/croshair.png" id="3_6t5aa"]
+[ext_resource type="FontFile" uid="uid://cjf3x6rdl3mob" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="3_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bgwcybrystnxq" path="res://Assets/Sprites/player/Player.png" id="3_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://rgbxg0yf2kje" path="res://Assets/Sounds/Menu/Player/Jump8.wav" id="4_3smsa"]
 [ext_resource type="Texture2D" uid="uid://clxs366hyd3wd" path="res://Assets/Sprites/player/Red Arrow.png" id="4_fkybt"]
@@ -290,20 +291,25 @@ shape = SubResource("RectangleShape2D_ukyrk")
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 
 [node name="TowerInteractContainer" type="PanelContainer" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -27.0
-offset_top = -34.0
-offset_right = 31.0
+offset_left = -31.0
+offset_top = -40.0
+offset_right = 36.0
 offset_bottom = -20.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="TowerInteractContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TowerInteractContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="Label" type="Label" parent="TowerInteractContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("3_8erm5")
+theme_override_font_sizes/font_size = 18
 text = "E to open"
 horizontal_alignment = 1
 vertical_alignment = 1

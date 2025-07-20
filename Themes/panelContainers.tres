@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cdx7abfdhao4j"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://cdx7abfdhao4j"]
 
 [ext_resource type="FontFile" uid="uid://cjf3x6rdl3mob" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="1_5uq2f"]
 [ext_resource type="Texture2D" uid="uid://bgpns0r4s7qwh" path="res://Assets/UI/CandyCaneBox3.png" id="1_rh5yi"]
@@ -39,6 +39,14 @@ texture_margin_right = 4.0
 texture_margin_bottom = 3.0
 axis_stretch_horizontal = 2
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5uq2f"]
+texture = ExtResource("3_sbxb5")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+axis_stretch_horizontal = 2
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl6ls"]
 texture = ExtResource("1_rh5yi")
 texture_margin_left = 4.0
@@ -59,5 +67,11 @@ Button/styles/disabled = SubResource("StyleBoxTexture_vflxg")
 Button/styles/hover = SubResource("StyleBoxTexture_irw0n")
 Button/styles/normal = SubResource("StyleBoxTexture_1wwgi")
 Button/styles/pressed = SubResource("StyleBoxTexture_rupkt")
+CheckBox/colors/font_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_focus_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_pressed_color = Color(1, 0, 0, 1)
+CheckBox/styles/hover_pressed = SubResource("StyleBoxTexture_5uq2f")
 Label/fonts/font = ExtResource("1_5uq2f")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_xl6ls")

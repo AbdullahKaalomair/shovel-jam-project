@@ -3,8 +3,9 @@ extends Node
 var money = 20
 var total_points = 0
 var round = 1
-const FINAL_ROUND = 2
-var enemy_number = 1 
+var FINAL_ROUND = 2
+var endless 
+var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -71,6 +72,7 @@ const PEPPERMINT_CANDY_ENEMY = preload("res://Scenes/Enemies/PeppermintCandyEnem
 const WRAPPED_CANDY_ENEMY = preload("res://Scenes/Enemies/wrapped_candy_enemy.tscn")
 const GUMBALL = preload("res://Scenes/gumball.tscn")
 
+const HAPPY = preload("res://Assets/Sounds/Music/happy.mp3")
 const X = preload("res://Assets/Sounds/X.ogg")
 const VAST_PLACES_LOOPING = preload("res://Assets/Sounds/Menu/Vast-Places_Looping.mp3")
 const VICTORY = preload("res://Assets/Sounds/Music/Victory.ogg")
@@ -81,6 +83,9 @@ func _on_enemy_give_point(point: Variant) -> void:
 	total_points += point
 	
 func _ready():
+	endless = GameSettings.endless_mode_enabled
+	if endless:
+		FINAL_ROUND = 999999999999999999
 	gumball_spawn_timer.wait_time = randi_range(5, 20)
 	gumball_spawn_timer.start()
 	
@@ -106,29 +111,53 @@ func _process(delta: float) -> void:
 	if not gumball_machine:
 		lose()
 	
-	if round == FINAL_ROUND:
-		var t = int(end_the_world_timer.time_left)
-		var minutes = t / 60
-		var seconds = t % 60
-		time_left_label.text = "%02d:%02d" % [minutes, seconds]
+	if not endless:
+		if round == FINAL_ROUND:
+			var t = int(end_the_world_timer.time_left)
+			var minutes = t / 60
+			var seconds = t % 60
+			time_left_label.text = "%02d:%02d" % [minutes, seconds]
+	else:
+		if round % 5 == 0:
+			var t = int(end_the_world_timer.time_left)
+			var minutes = t / 60
+			var seconds = t % 60
+			time_left_label.text = "%02d:%02d" % [minutes, seconds]
 	
 	if Input.is_action_just_pressed("pause"):
 		pause()
 
 func nextWave():
 	round += 1
-	if round < FINAL_ROUND:
-		show_wave_message()
-		enemy_spawn_timer.stop()
-		await gumball_machine.sink_and_shake()
-		teleport_tower()
-		round_start_timer.start()
-		enemy_number += 5
-		enemy_spawn_timer.wait_time -= 0.3
-		enemy_spawned = 0
-		enemy_killed = 0
-	else:
-		#result_container.visible = true
+	if not endless:
+		if round < FINAL_ROUND:
+			show_wave_message()
+			enemy_spawn_timer.stop()
+			await gumball_machine.sink_and_shake()
+			teleport_tower()
+			round_start_timer.start()
+			enemy_number += 5
+			enemy_spawn_timer.wait_time -= 0.3
+			enemy_spawned = 0
+			enemy_killed = 0
+		else:
+			#result_container.visible = true
+			wave_label.text = "THE END OF THE WORLD JUST GOT STARTED BY THE MACHINE"
+			show_wave_message()
+			enemy_spawn_timer.stop()
+			audio_stream_player.stream = X
+			audio_stream_player.play()
+			await gumball_machine.sink_and_shake()
+			gumball_machine.hide()
+			timer_container.show()
+			end_the_world_timer.start()
+			gumball_machine_evil.update_hp(gumball_machine.health, gumball_machine.max_health)
+			teleport_tower()
+			maximum_gumball_number = 3
+			for gumball_spawn_num in gumball_spawned:
+				_on_gumball_player_pickup(gumball_spawn_num)
+				
+	elif round % 5 == 0:
 		wave_label.text = "THE END OF THE WORLD JUST GOT STARTED BY THE MACHINE"
 		show_wave_message()
 		enemy_spawn_timer.stop()
@@ -140,9 +169,18 @@ func nextWave():
 		end_the_world_timer.start()
 		gumball_machine_evil.update_hp(gumball_machine.health, gumball_machine.max_health)
 		teleport_tower()
-		maximum_gumball_number = 3
-		for gumball_spawn_num in gumball_spawned:
-			_on_gumball_player_pickup(gumball_spawn_num)
+	else:
+		wave_label.text = "Prepare the MACHINE for the next wave..."
+		show_wave_message()
+		enemy_spawn_timer.stop()
+		await gumball_machine.sink_and_shake()
+		teleport_tower()
+		round_start_timer.start()
+		enemy_number += 3
+		enemy_spawn_timer.wait_time = max (0.2 , enemy_spawn_timer.wait_time - 0.3)
+		enemy_spawned = 0
+		enemy_killed = 0
+		
 		
 		
 func teleport_tower():
@@ -162,10 +200,14 @@ func teleport_tower():
 		4:
 			gumball_machine.position = tower_spawn_4.position
 	player.red_arrow.visible = true
-	if round == FINAL_ROUND:
+	if not endless:
+		if round == FINAL_ROUND:
+			round_start_timer.start()
+			gumball_machine_evil.position  = gumball_machine.position
+	elif round % 5 == 0:
 		round_start_timer.start()
 		gumball_machine_evil.position  = gumball_machine.position
-
+			
 func losePoints(points: int):
 	money = max(0, money - points)
 	
@@ -198,26 +240,42 @@ func pause():
 	paused = !paused
 	
 func win():
-	result_container.modulate.a = 0.0  # Start fully transparent
-	result_container.visible = true
+	if not endless:
+		result_container.modulate.a = 0.0  # Start fully transparent
+		result_container.visible = true
 
-	result_label.text = "YOU SAVED THE WORLD \nTotal points: " + str(total_points)
-	end_the_world_timer.stop()
-	audio_stream_player.stream = VICTORY
-	audio_stream_player.autoplay = false
-	audio_stream_player.play()
-	
-	# Start fade-in tween
-	var tween := get_tree().create_tween()
-	tween.tween_property(result_container, "modulate:a", 1.0, 0.5) # Fade in over 1.5 sec
-	await tween.finished
-	get_tree().paused = true
+		result_label.text = "YOU SAVED THE WORLD \nTotal points: " + str(total_points)
+		end_the_world_timer.stop()
+		audio_stream_player.stream = VICTORY
+		audio_stream_player.autoplay = false
+		audio_stream_player.play()
+		
+		# Start fade-in tween
+		var tween := get_tree().create_tween()
+		tween.tween_property(result_container, "modulate:a", 1.0, 0.5) # Fade in over 1.5 sec
+		await tween.finished
+		get_tree().paused = true
+	else:
+		end_the_world_timer.stop()
+		end_the_world_timer.wait_time = 120
+		timer_container.hide()
+		audio_stream_player.stream = HAPPY
+		audio_stream_player.play()
+		nextWave()
+		gumball_machine.show()
+		gumball_machine_evil.position.x = 3987.0
+		gumball_machine_evil.resurrect()
 
 func lose():
+	
 	result_container.visible = true
 	result_container.modulate.a = 0.0  # Start fully transparent
 	
-	result_label.text = "You lose \nTotal points: " +  str(total_points)
+	if not endless:
+		result_label.text = "You lose \nTotal points: " +  str(total_points)
+	else:
+		result_label.text = "Game Over! \nTotal points: " +  str(total_points) + "\nWave reached: " + str(round)
+	
 	enemy_spawn_timer.stop()
 	audio_stream_player.stream = VAST_PLACES_LOOPING
 	audio_stream_player.play()
@@ -266,7 +324,7 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 func _on_enemy_death():
 	enemy_killed += 1
-	if enemy_killed == enemy_number + 1:
+	if enemy_killed >= enemy_number + 1:
 		nextWave()
 
 func _on_gumball_player_pickup(gumball_spawn_num):
@@ -328,3 +386,7 @@ func _on_end_the_world_timer_timeout() -> void:
 func _on_quit_button_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file(MENU)
+
+
+func _on_gumball_machine_death() -> void:
+	lose()

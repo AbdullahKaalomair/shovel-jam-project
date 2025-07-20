@@ -138,6 +138,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func _on_explosion_audio_stream_player_2d_finished() -> void:
 	print("MACHIEN DEAD")
 	emit_signal("death")
-	queue_free()
+	if not GameSettings.endless_mode_enabled:
+		queue_free()
 	
 	

@@ -847,6 +847,11 @@ grow_vertical = 2
 theme = ExtResource("1_kmwmt")
 script = ExtResource("1_1rerr")
 
+[node name="TitleSprite" type="Sprite2D" parent="."]
+position = Vector2(577, 77)
+scale = Vector2(2, 2)
+texture = ExtResource("3_dldpb")
+
 [node name="MenuMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -854,36 +859,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 0
 
-[node name="TitleSprite" type="Sprite2D" parent="MenuMarginContainer"]
-position = Vector2(577, 77)
-scale = Vector2(2, 2)
-texture = ExtResource("3_dldpb")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuMarginContainer"]
+[node name="VBoxContainer" type="GridContainer" parent="MenuMarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+columns = 2
 
 [node name="Play" type="Button" parent="MenuMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xhh6f")
 text = "Play"
 
+[node name="CheckBox" type="CheckBox" parent="MenuMarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Endless"
+
 [node name="Tutorial" type="Button" parent="MenuMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xhh6f")
 text = "Tutorial"
+
+[node name="Label" type="Label" parent="MenuMarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Options" type="Button" parent="MenuMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xhh6f")
 text = "Options"
 
+[node name="Label2" type="Label" parent="MenuMarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Credits" type="Button" parent="MenuMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_xhh6f")
 text = "Credits"
+
+[node name="Label3" type="Label" parent="MenuMarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Quit" type="Button" parent="MenuMarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1135,6 +1151,10 @@ text = "[center][font_size=48]Gumbo* and the MACHINE[/font_size]
 [font_size=24]By rezoner[/font_size]
 [font_size=24]www.OpenGameArt.org[/font_size]
 
+[font_size=20]\"Victory\"[/font_size]
+[font_size=24]By Eliot Corley from ChaosIsHarmony[/font_size]
+[font_size=24]www.OpenGameArt.org[/font_size]
+
 [font_size=48]- Sound Effects -[/font_size]
 
 [font_size=24]Eric Matyas | www.soundimage.org[/font_size]
@@ -1156,6 +1176,7 @@ text = "[center][font_size=48]Gumbo* and the MACHINE[/font_size]
 layout_mode = 1
 
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="toggled" from="MenuMarginContainer/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
