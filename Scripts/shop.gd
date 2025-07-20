@@ -4,7 +4,8 @@ extends Control
 @onready var gumball_machine: Tower = $"../../GumballMachine"
 @onready var gumball_machine_evil: Tower_Enemy = $"../../GumballMachine_Evil"
 @onready var player: Player = $"../../Player"
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_stream_player_2d: AudioStreamPlayer = $AudioStreamPlayer2D
+
 
 @onready var shop: Control = $"."
 @onready var tower_hp_button: Button = $ShopContainer/MarginContainer/GridContainer/TowerHPButton
