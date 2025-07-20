@@ -975,7 +975,7 @@ text = "Exit"
 
 [node name="BGAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_cayip")
-volume_db = -10.0
+volume_db = -15.0
 autoplay = true
 parameters/looping = true
 
