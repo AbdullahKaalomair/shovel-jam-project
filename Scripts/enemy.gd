@@ -92,12 +92,12 @@ func take_damage(damage: int):
 	activate_hit_shader_effect()
 	if health <= 0:
 		emit_signal("givePoint", 5)
-		emit_signal("death")
-		self.hide()
 		area_2d.set_deferred("monitoring", false)
 		collision_shape_2d.set_deferred("disabled", true)
+		self.hide()
 		death_audio_stream_player_2d.play()
 		await death_audio_stream_player_2d.finished
+		emit_signal("death")
 		queue_free()
 
 func animation_handle():

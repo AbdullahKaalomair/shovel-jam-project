@@ -14,7 +14,7 @@ warnings/check_invalid_track_paths=false
 
 [application]
 
-config/name="SHOVEL JAM PROJECT"
+config/name="Gumbo* and the MACHINE!"
 run/main_scene="uid://b8qlpb15j1vy"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
