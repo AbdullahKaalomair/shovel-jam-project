@@ -26,6 +26,7 @@ var gumballs = 0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var gumball: Sprite2D = $Gumballs/Gumball
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
 @onready var gumball_3: Sprite2D = $Gumballs/Gumball3
@@ -164,7 +165,8 @@ func handle_wall_jump():
 func get_hit(from_position: Vector2) -> void:
 	if is_invulnerable:
 		return
-		
+	
+	animation_player.play("lose_ammo")
 	ammo = max(ammo - 25, 0)
 	remove_gumballs(1)
 	
@@ -213,3 +215,7 @@ func remove_gumballs(used_gumballs):
 			gumball_3.visible = false
 
 	
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	animation_player.play("RESET")

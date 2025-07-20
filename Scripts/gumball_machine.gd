@@ -6,6 +6,7 @@ var health = 10
 var damage_sources := {}
 var damage_timer := 0.0
 const DAMAGE_INTERVAL := 1.0  # damage every 1 second
+var dead = false
 
 var playerIn = false
 @export var player: Node2D
@@ -72,7 +73,9 @@ func take_damage(damage: int):
 		#sprite.frame -= 1
 	sprite_handle()
 	if health <= 0:
-		deathh()
+		if not dead:
+			dead = true
+			deathh()
 
 func heal_tower_gumballs(gumballs: int):
 	var used_gumballs = 0 
@@ -131,5 +134,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_explosion_audio_stream_player_2d_finished() -> void:
+	print("MACHIEN DEAD")
 	emit_signal("death")
 	queue_free()
+	
+	

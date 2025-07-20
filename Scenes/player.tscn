@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://b3k1va8bpeacs"]
+[gd_scene load_steps=30 format=3 uid="uid://b3k1va8bpeacs"]
 
 [ext_resource type="Script" uid="uid://cnxt102j160ru" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://84hiamd4sgas" path="res://Assets/Sprites/croshair.png" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://bgwcybrystnxq" path="res://Assets/Sprites/player/Player.png" id="3_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://clxs366hyd3wd" path="res://Assets/Sprites/player/Red Arrow.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://d3sj0lecd6tmp" path="res://Assets/Sprites/gumball.png" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://dhihngxnt17lq" path="res://Assets/Sprites/player/CandyCorn Bullet.png" id="6_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
 atlas = ExtResource("3_x3wgy")
@@ -158,6 +159,115 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukyrk"]
 size = Vector2(12, 15)
 
+[sub_resource type="Animation" id="Animation_3smsa"]
+resource_name = "lose_ammo"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CandyCornBullet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.29, 0.49),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, -10), Vector2(6, -13), Vector2(9, -16), Vector2(13, -13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CandyCornBullet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CandyCornBullet2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, -10), Vector2(-4, -13), Vector2(-10, -15), Vector2(-13, -12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CandyCornBullet2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8erm5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CandyCornBullet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, -9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CandyCornBullet:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CandyCornBullet2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, -10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CandyCornBullet2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ek2"]
+_data = {
+&"RESET": SubResource("Animation_8erm5"),
+&"lose_ammo": SubResource("Animation_3smsa")
+}
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 2
@@ -244,4 +354,23 @@ position = Vector2(17, 0)
 [node name="reticle" type="Sprite2D" parent="TurnAxises/TurnAxis/ShootPoint"]
 texture = ExtResource("3_6t5aa")
 
+[node name="CandyCornBullet" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, -9)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_x3wgy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f1ek2")
+}
+speed_scale = 2.0
+
+[node name="CandyCornBullet2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, -10)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_x3wgy")
+
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

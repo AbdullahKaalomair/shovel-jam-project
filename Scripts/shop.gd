@@ -13,7 +13,7 @@ extends Control
 
 var speed_boost_price = 200
 var has_speed_boost = false
-var turret_upgrade_price = 1
+var turret_upgrade_price = 300
 
 
 func open_shop() -> void:

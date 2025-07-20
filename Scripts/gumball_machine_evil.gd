@@ -18,9 +18,13 @@ func take_damage(damage: int):
 	activate_hit_shader_effect()
 	sprite_handle()
 	if health <= 0:
-		deathh()
+		if not dead:
+			dead = true
+			deathh()
 		
-	if damage_to_teleport >= teleport_threshold:
+
+		
+	if damage_to_teleport >= teleport_threshold and not dead:
 		damage_to_teleport = 0
 		await sink_and_shake()
 		emit_signal("teleport")
