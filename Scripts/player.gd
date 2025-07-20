@@ -26,6 +26,7 @@ var gumballs = 0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var jump_audio_stream_player_2d: AudioStreamPlayer2D = $Node/JumpAudioStreamPlayer2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var gumball: Sprite2D = $Gumballs/Gumball
 @onready var gumball_2: Sprite2D = $Gumballs/Gumball2
@@ -134,6 +135,7 @@ func handle_jump():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
+			jump_audio_stream_player_2d.play()
 
 	elif not is_on_floor():
 		# Cut jump short if released early
@@ -145,7 +147,8 @@ func handle_jump():
 		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
 			
 			velocity.y = JUMP_VELOCITY * 0.8
-			air_jump = false  # 🔑 Prevent further jumps until landing
+			air_jump = false 
+			jump_audio_stream_player_2d.play()
 
 
 func handle_wall_jump():
