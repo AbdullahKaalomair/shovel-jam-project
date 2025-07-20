@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://jnksh2oi3llo"]
+[gd_scene load_steps=20 format=4 uid="uid://jnksh2oi3llo"]
 
 [ext_resource type="Script" uid="uid://icndyyd0di0d" path="res://Scenes/tutorial.gd" id="1_70gml"]
 [ext_resource type="TileSet" uid="uid://cnk82yemfqaxs" path="res://Assets/Tileset/game.tres" id="1_feyax"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://qipq5rqys2ab" path="res://Scenes/gumball.tscn" id="3_p8jf4"]
 [ext_resource type="PackedScene" uid="uid://bar1w00s77654" path="res://Scenes/gumball_machine.tscn" id="4_p1f1o"]
 [ext_resource type="PackedScene" uid="uid://byadqe1liuwc2" path="res://Scenes/shop_keeper.tscn" id="5_ys4pu"]
+[ext_resource type="PackedScene" uid="uid://dtqxtwn644lo0" path="res://Scenes/fade_layer.tscn" id="6_jb51l"]
 [ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="6_on4kn"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="7_70gml"]
 [ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="8_8va2t"]
@@ -43,6 +44,8 @@ position = Vector2(1207, -128)
 shop = NodePath("../CanvasLayer/Shop")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fadeLayer" parent="CanvasLayer" instance=ExtResource("6_jb51l")]
 
 [node name="ResourceContainer" type="PanelContainer" parent="CanvasLayer"]
 offset_left = 17.0

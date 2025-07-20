@@ -20,6 +20,7 @@ var is_credits_being_watched = false
 @onready var bg_modulate = $MenuObjects/Background/ParallaxBackground/BackgroundModulate
 @onready var tutorial_container: PanelContainer = $TutorialContainer
 
+@onready var fade_layer: Control = $fadeLayer
 
 var menu_music = preload("res://Assets/Sounds/Menu/Christmas synths.ogg")
 var coin_se = preload("res://Assets/Sounds/Menu/Coins5.mp3")
@@ -49,10 +50,12 @@ func _input(event: InputEvent) -> void:
 			end_credits()
 
 func _on_play_pressed() -> void:
+	await fade_layer.play_fade_in()
 	get_tree().change_scene_to_file(game_scene)
 
 
 func _on_tutorial_pressed() -> void:
+	await fade_layer.play_fade_in()
 	get_tree().change_scene_to_file(tutorial_scene)
 	#tutorial_container.show()
 

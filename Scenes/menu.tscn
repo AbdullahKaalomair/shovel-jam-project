@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://b8qlpb15j1vy"]
+[gd_scene load_steps=46 format=4 uid="uid://b8qlpb15j1vy"]
 
 [ext_resource type="Script" uid="uid://jhoq3dsbytf7" path="res://Scripts/menu.gd" id="1_1rerr"]
 [ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="1_kmwmt"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bgwcybrystnxq" path="res://Assets/Sprites/player/Player.png" id="6_wbdvm"]
 [ext_resource type="Texture2D" uid="uid://b42ucgjqf8o2d" path="res://Assets/Sprites/Title/TitleMachine.png" id="7_q3rjx"]
 [ext_resource type="Texture2D" uid="uid://blbpmsyu166t8" path="res://Assets/Sprites/Background/Clouds.png" id="12_1by5w"]
+[ext_resource type="PackedScene" uid="uid://dtqxtwn644lo0" path="res://Scenes/fade_layer.tscn" id="18_rc6uw"]
 
 [sub_resource type="Animation" id="Animation_q3rjx"]
 length = 0.001
@@ -1134,6 +1135,9 @@ text = "[center][font_size=48]Insert Game Title...[/font_size]
 [font_size=48]- For the Inbound Shovel Jam -[/font_size]
 [img=280]res:///Assets/Credits/ShovelJamLogo_SmallSize.png[/img]
 [/center]"
+
+[node name="fadeLayer" parent="." instance=ExtResource("18_rc6uw")]
+layout_mode = 1
 
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuMarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]

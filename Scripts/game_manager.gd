@@ -2,8 +2,8 @@ extends Node
 
 var money = 20
 var round = 1
-const FINAL_ROUND = 2
-var enemy_number = 1
+const FINAL_ROUND = 7
+var enemy_number = 5
 var enemy_spawned = 0
 var enemy_killed = 0
 var enemy_spawn_point = randi_range(1, 4)
@@ -19,21 +19,26 @@ var maximum_gumball_number = 5
 @onready var gumball_machine_evil: Tower_Enemy = $"../GumballMachine_Evil"
 @onready var player: Player = $"../Player"
 
+#labels
 @onready var ammo_number_label: Label = $"../CanvasLayer/ResourceContainer/MarginContainer/GridContainer/AmmoNumberLabel"
 @onready var point_number_label: Label = $"../CanvasLayer/ResourceContainer/MarginContainer/GridContainer/PointNumberLabel"
 @onready var wave_number_label: Label = $"../CanvasLayer/ResourceContainer/MarginContainer/GridContainer/WaveNumberLabel"
 @onready var result_label: Label = $"../CanvasLayer/ResultContainer/VBoxContainer/ResultLabel"
 @onready var time_left_label: Label = $"../CanvasLayer/TimerContainer/CenterContainer/TimeLeftLabel"
 
+#timers
 @onready var enemy_spawn_timer: Timer = $"../Timers/EnemySpawnTimer"
 @onready var round_start_timer: Timer = $"../Timers/RoundStartTimer"
 @onready var gumball_spawn_timer: Timer = $"../Timers/GumballSpawnTimer"
 @onready var end_the_world_timer: Timer = $"../Timers/EndTheWorldTimer"
 
+#canvas layer elements
 @onready var result_container: PanelContainer = $"../CanvasLayer/ResultContainer"
 @onready var wave_container: PanelContainer = $"../CanvasLayer/WaveContainer"
 @onready var wave_label: Label = $"../CanvasLayer/WaveContainer/CenterContainer/MarginContainer/WaveLabel"
 @onready var timer_container: PanelContainer = $"../CanvasLayer/TimerContainer"
+@onready var fade_layer: Control = $"../CanvasLayer/fadeLayer"
+
 
 @onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
 
@@ -85,7 +90,9 @@ func _ready():
 			gumball_machine.position = tower_spawn_3.position
 		4:
 			gumball_machine.position = tower_spawn_4.position
-
+		
+	
+		
 func _process(delta: float) -> void:
 	ammo_number_label.text = str(player.ammo)
 	point_number_label.text = str(money)
@@ -245,6 +252,7 @@ func _on_round_start_timer_timeout() -> void:
 
 
 func _on_restart_button_pressed() -> void:
+	await fade_layer.play_fade_in()
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 

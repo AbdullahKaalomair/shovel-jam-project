@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://sxac10n7gvt6"]
+[gd_scene load_steps=20 format=4 uid="uid://sxac10n7gvt6"]
 
 [ext_resource type="PackedScene" uid="uid://b3k1va8bpeacs" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://cuisa7ndgxb5d" path="res://Scenes/Enemies/gumball_machine_evil.tscn" id="3_1phco"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dipcv81rfuh0d" path="res://Scripts/game_manager.gd" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://rcf2fnyhkmf7" path="res://Scenes/shop.tscn" id="5_v158k"]
 [ext_resource type="PackedScene" uid="uid://onvhaye8n1t3" path="res://Scenes/pause_menu.tscn" id="6_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://dtqxtwn644lo0" path="res://Scenes/fade_layer.tscn" id="6_ewbju"]
 [ext_resource type="Theme" uid="uid://cdx7abfdhao4j" path="res://Themes/panelContainers.tres" id="6_nnt18"]
 [ext_resource type="Theme" path="res://Themes/fontTheme.tres" id="7_nb51f"]
 [ext_resource type="Texture2D" uid="uid://c7qiorhf30x0t" path="res://Assets/Sprites/Background/Sky.png" id="8_o5yvi"]
@@ -68,6 +69,10 @@ unique_name_in_owner = true
 script = ExtResource("5_i6g32")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fadeLayer" parent="CanvasLayer" instance=ExtResource("6_ewbju")]
+process_mode = 3
+z_index = 1
 
 [node name="ResourceContainer" type="PanelContainer" parent="CanvasLayer"]
 offset_left = 17.0
